@@ -54,6 +54,7 @@ server
         <meta charSet='utf-8' />
         <title>Razzle Redux Example</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500">
         ${assets.client.css
           ? `<link rel="stylesheet" href="${assets.client.css}">`
           : ''}

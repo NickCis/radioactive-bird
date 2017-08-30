@@ -4,11 +4,16 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import AppSearch from './AppSearch';
 
 const styles = {
   root: {
-    marginTop: 30,
+    display: 'flex',
+    alignItems: 'stretch',
     width: '100%',
+  },
+  grow: {
+    flex: '1 1 auto',
   },
 };
 
@@ -19,8 +24,10 @@ const _AppBar = props => {
       <AppBar position="static">
         <Toolbar>
           <Typography type="title" color="inherit">
-            Title
+            Radioactive Bird
           </Typography>
+          <div className={classes.grow} />
+          <AppSearch />
         </Toolbar>
       </AppBar>
     </div>
