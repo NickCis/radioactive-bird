@@ -1,13 +1,16 @@
-import App from '../common/containers/App';
-import { Provider } from 'react-redux';
-import React from 'react';
 import configureStore from '../common/store/configureStore';
 import express from 'express';
 import { fetchCounter } from '../common/api/counter';
-import path from 'path';
 import qs from 'qs';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
+
+import React from 'react';
+import { Provider } from 'react-redux';
+import App from '../common/components/App';
+import { JssProvider } from 'react-jss';
+import { MuiThemeProvider } from 'material-ui/styles';
+import { sheetsManager, theme, sheetsRegistry, jss } from '../common/styles';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -31,9 +34,15 @@ server
       // Render the component to a string
       const markup = renderToString(
         <Provider store={store}>
-          <App />
+          <JssProvider registry={sheetsRegistry} jss={jss}>
+            <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
+              <App />
+            </MuiThemeProvider>
+          </JssProvider>
         </Provider>
       );
+
+      const css = sheetsRegistry.toString();
 
       // Grab the initial state from our Redux store
       const finalState = store.getState();
@@ -48,9 +57,12 @@ server
         ${assets.client.css
           ? `<link rel="stylesheet" href="${assets.client.css}">`
           : ''}
-          ${process.env.NODE_ENV === 'production'
-            ? `<script src="${assets.client.js}" defer></script>`
-            : `<script src="${assets.client.js}" defer crossorigin></script>`}
+        ${css
+          ? `<style id='jss-ssr'>${css}</style>`
+          : ''}
+        ${process.env.NODE_ENV === 'production'
+          ? `<script src="${assets.client.js}" defer></script>`
+          : `<script src="${assets.client.js}" defer crossorigin></script>`}
     </head>
     <body>
         <div id="root">${markup}</div>
