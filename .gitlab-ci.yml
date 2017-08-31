@@ -1,12 +1,11 @@
 image: node:8.4
 
-stages:
-  - build
-  - test
+cache:
+  paths:
+    - node_modules/
 
-build:
-  script:
-    - yarn install
+before_script:
+  - yarn install
 
 test:
   script:
