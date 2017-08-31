@@ -14,7 +14,7 @@ describe('<App />', () => {
   });
 
   it('renders without crashing', () => {
-    const wrapper = render(
+    render(
       <Provider store={store}>
         <App />
       </Provider>

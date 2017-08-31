@@ -10,8 +10,6 @@ describe('<AppBar />', () => {
   });
 
   it('renders without crashing', () => {
-    const wrapper = render(
-      <AppBar />
-    );
+    render(<AppBar />);
   });
 });
