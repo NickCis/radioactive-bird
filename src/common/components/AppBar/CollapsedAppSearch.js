@@ -18,6 +18,9 @@ const styles = theme => ({
     color: theme.palette.text.primary,
     margin: `0px ${theme.spacing.unit}px`,
     display: 'flex',
+    visibility: 'hidden',
+    opacity: 0,
+    transition: 'visibility 0s linear 0.2s, opacity 0.2s linear',
   },
   input: {
     flex: '1 1 auto',
@@ -38,6 +41,16 @@ const styles = theme => ({
   },
   searchButtonWrapper: {
     'text-align': 'right',
+  },
+  open: {
+    '& $searchButtonWrapper': {
+      visibility: 'hidden',
+    },
+    '& $form': {
+      visibility: 'visible',
+      opacity: 1,
+      'transition-delay': '0s',
+    },
   },
 });
 
@@ -84,12 +97,11 @@ class CollapsedAppSearch extends React.Component {
   }
 
   renderSearchButton() {
-    const { classes, className } = this.props;
+    const { classes } = this.props;
     return (
       <div
         className={[
           classes.searchButtonWrapper,
-          className ? className : '',
         ].join(' ')}
       >
         <IconButton color="contrast" onClick={() => this.handleOpen()}>
@@ -100,11 +112,11 @@ class CollapsedAppSearch extends React.Component {
   }
 
   renderSearchInput() {
-    const { classes, className } = this.props;
+    const { classes } = this.props;
     const { text } = this.state;
     return (
       <form
-        className={[classes.form, className ? className : ''].join(' ')}
+        className={classes.form}
         onSubmit={e => this.handleSearch(e)}
       >
         <IconButton
@@ -134,8 +146,17 @@ class CollapsedAppSearch extends React.Component {
   }
 
   render() {
+    const { className, classes } = this.props;
     const { open } = this.state;
-    return open ? this.renderSearchInput() : this.renderSearchButton();
+    return (
+      <div className={[
+        open ? classes.open : '',
+        className ? className: ''
+      ].join(' ')}>
+        { this.renderSearchInput() }
+        { this.renderSearchButton() }
+      </div>
+    );
   }
 }
 
