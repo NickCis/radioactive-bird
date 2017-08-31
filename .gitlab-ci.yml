@@ -1,0 +1,15 @@
+image: node:8.4
+
+stages:
+  - build
+  - test
+
+build:
+  script:
+    - yarn install
+
+test:
+  script:
+    - yarn format
+    - yarn lint
+    - yarn test
