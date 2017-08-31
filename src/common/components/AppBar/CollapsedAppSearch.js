@@ -70,6 +70,10 @@ class CollapsedAppSearch extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.open && this.state.open) this.searchInput.focus();
+  }
+
   handleClose() {
     this.setState({
       ...this.state,
@@ -119,6 +123,7 @@ class CollapsedAppSearch extends React.Component {
           <ArrowBack />
         </IconButton>
         <input
+          ref={i => (this.searchInput = i)}
           className={classes.input}
           value={text}
           placeholder="Buscar"
@@ -141,6 +146,7 @@ class CollapsedAppSearch extends React.Component {
   render() {
     const { className, classes } = this.props;
     const { open } = this.state;
+
     return (
       <div
         className={[open ? classes.open : '', className ? className : ''].join(
