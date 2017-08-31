@@ -4,21 +4,35 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import AppSearch from './AppSearch';
+import ExpandedAppSearch from './ExpandedAppSearch';
+import CollapsedAppSearch from './CollapsedAppSearch';
 
 const styles = {
   root: {
     display: 'flex',
-    alignItems: 'stretch',
     width: '100%',
   },
-  grow: {
+  expandedAppSearch: {
     flex: '1 1 auto',
   },
+  collapsedAppSearch: {
+    flex: '1 1 auto',
+  },
+  '@media (max-width: 670px)': {
+    expandedAppSearch: {
+      visibility: 'hidden',
+      display: 'none',
+    }
+  },
+  '@media (min-width: 670px)': {
+    collapsedAppSearch: {
+      visibility: 'hidden',
+      display: 'none',
+    }
+  }
 };
 
-const _AppBar = props => {
-  const classes = props.classes;
+const _AppBar = ({classes}) => {
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -26,8 +40,8 @@ const _AppBar = props => {
           <Typography type="title" color="inherit">
             Radioactive Bird
           </Typography>
-          <div className={classes.grow} />
-          <AppSearch />
+          <ExpandedAppSearch className={classes.expandedAppSearch} onSearch={text => console.log(`Searched: ${text}`)}/>
+          <CollapsedAppSearch className={classes.collapsedAppSearch} onSearch={text => console.log(`Collapsed Searched: ${text}`)}/>
         </Toolbar>
       </AppBar>
     </div>
