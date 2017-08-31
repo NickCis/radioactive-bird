@@ -4,6 +4,4 @@ const placeholder = conf => ({
   '&::-moz-placeholder': conf,
 });
 
-export {
-  placeholder
-};
+export { placeholder };

@@ -22,17 +22,17 @@ const styles = {
     expandedAppSearch: {
       visibility: 'hidden',
       display: 'none',
-    }
+    },
   },
   '@media (min-width: 670px)': {
     collapsedAppSearch: {
       visibility: 'hidden',
       display: 'none',
-    }
-  }
+    },
+  },
 };
 
-const _AppBar = ({classes}) => {
+const _AppBar = ({ classes }) => {
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -40,13 +40,19 @@ const _AppBar = ({classes}) => {
           <Typography type="title" color="inherit">
             Radioactive Bird
           </Typography>
-          <ExpandedAppSearch className={classes.expandedAppSearch} onSearch={text => console.log(`Searched: ${text}`)}/>
-          <CollapsedAppSearch className={classes.collapsedAppSearch} onSearch={text => console.log(`Collapsed Searched: ${text}`)}/>
+          <ExpandedAppSearch
+            className={classes.expandedAppSearch}
+            onSearch={text => console.log(`Searched: ${text}`)}
+          />
+          <CollapsedAppSearch
+            className={classes.collapsedAppSearch}
+            onSearch={text => console.log(`Collapsed Searched: ${text}`)}
+          />
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
 
 _AppBar.propTypes = {
   classes: PropTypes.object.isRequired,

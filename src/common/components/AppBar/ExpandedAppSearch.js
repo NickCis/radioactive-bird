@@ -60,7 +60,7 @@ class ExpandedAppSearch extends React.Component {
     this.state = {
       focus: false,
       text: props.text || '',
-    }
+    };
   }
 
   handleFocus() {
@@ -93,15 +93,19 @@ class ExpandedAppSearch extends React.Component {
 
   handleSearch(e) {
     e && e.preventDefault && e.preventDefault();
-    if (this.state.text)
-      this.props.onSearch(this.state.text);
+    if (this.state.text) this.props.onSearch(this.state.text);
   }
 
   render() {
     const { classes, className } = this.props;
     const { focus, text } = this.state;
     return (
-      <form className={[classes.wrapper, focus ? classes.focus: '', className ? className : ''].join(' ')}
+      <form
+        className={[
+          classes.wrapper,
+          focus ? classes.focus : '',
+          className ? className : '',
+        ].join(' ')}
         onSubmit={e => this.handleSearch(e)}
       >
         <IconButton
@@ -118,14 +122,16 @@ class ExpandedAppSearch extends React.Component {
           placeholder="Buscar"
           onChange={e => this.handleChange(e)}
         />
-        { text.length ? (
+        {text.length ? (
           <IconButton
             className={classes.button}
             onClick={() => this.handleClear()}
           >
             <Clear />
           </IconButton>
-        ) : ''}
+        ) : (
+          ''
+        )}
       </form>
     );
   }
@@ -134,6 +140,7 @@ class ExpandedAppSearch extends React.Component {
 ExpandedAppSearch.propTypes = {
   classes: PropTypes.object.isRequired,
   onSearch: PropTypes.func.isRequired,
+  className: PropTypes.string,
   text: PropTypes.string,
 };
 

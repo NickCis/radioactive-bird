@@ -22,7 +22,7 @@ const styles = theme => ({
   },
 });
 
-const App = ({classes}) => (
+const App = ({ classes }) => (
   <div>
     <AppBar />
     <Counter />

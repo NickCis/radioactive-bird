@@ -58,9 +58,7 @@ server
         ${assets.client.css
           ? `<link rel="stylesheet" href="${assets.client.css}">`
           : ''}
-        ${css
-          ? `<style id='jss-ssr'>${css}</style>`
-          : ''}
+        ${css ? `<style id='jss-ssr'>${css}</style>` : ''}
         ${process.env.NODE_ENV === 'production'
           ? `<script src="${assets.client.js}" defer></script>`
           : `<script src="${assets.client.js}" defer crossorigin></script>`}

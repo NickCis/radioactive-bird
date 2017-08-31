@@ -80,18 +80,19 @@ class CollapsedAppSearch extends React.Component {
 
   handleSearch(e) {
     e && e.preventDefault && e.preventDefault();
-    if (this.state.text)
-      this.props.onSearch(this.state.text);
+    if (this.state.text) this.props.onSearch(this.state.text);
   }
 
   renderSearchButton() {
     const { classes, className } = this.props;
     return (
-      <div className={[classes.searchButtonWrapper, className ? className : ''].join(' ')}>
-        <IconButton
-          color='contrast'
-          onClick={() => this.handleOpen()}
-        >
+      <div
+        className={[
+          classes.searchButtonWrapper,
+          className ? className : '',
+        ].join(' ')}
+      >
+        <IconButton color="contrast" onClick={() => this.handleOpen()}>
           <Search />
         </IconButton>
       </div>
@@ -118,14 +119,16 @@ class CollapsedAppSearch extends React.Component {
           placeholder="Buscar"
           onChange={e => this.handleChange(e)}
         />
-        { text.length ? (
+        {text.length ? (
           <IconButton
             className={classes.button}
             onClick={() => this.handleClear()}
           >
             <Clear />
           </IconButton>
-        ) : ''}
+        ) : (
+          ''
+        )}
       </form>
     );
   }
@@ -139,6 +142,7 @@ class CollapsedAppSearch extends React.Component {
 CollapsedAppSearch.propTypes = {
   classes: PropTypes.object.isRequired,
   onSearch: PropTypes.func.isRequired,
+  className: PropTypes.string,
   text: PropTypes.string,
 };
 
