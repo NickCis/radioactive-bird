@@ -11,9 +11,9 @@
     "lint": "eslint src/"
   },
   "jest": {
-      "moduleNameMapper": {
-          "^~/(.*?)$": "<rootDir>/src/$1"
-      }
+    "moduleNameMapper": {
+      "^~/(.*?)$": "<rootDir>/src/$1"
+    }
   },
   "dependencies": {
     "express": "^4.15.2",
@@ -29,6 +29,7 @@
     "serialize-javascript": "^1.3.0"
   },
   "devDependencies": {
+    "enzyme": "^2.9.1",
     "eslint": "^4.5.0",
     "eslint-config-google": "^0.9.1",
     "eslint-config-prettier": "^2.3.0",
@@ -36,6 +37,7 @@
     "eslint-plugin-react": "^7.3.0",
     "prettier": "^1.6.1",
     "razzle": "^0.8.2",
-    "react-test-renderer": "^15.6.1"
+    "react-test-renderer": "^15.6.1",
+    "redux-mock-store": "^1.2.3"
   }
 }
