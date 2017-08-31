@@ -99,11 +99,7 @@ class CollapsedAppSearch extends React.Component {
   renderSearchButton() {
     const { classes } = this.props;
     return (
-      <div
-        className={[
-          classes.searchButtonWrapper,
-        ].join(' ')}
-      >
+      <div className={classes.searchButtonWrapper}>
         <IconButton color="contrast" onClick={() => this.handleOpen()}>
           <Search />
         </IconButton>
@@ -115,10 +111,7 @@ class CollapsedAppSearch extends React.Component {
     const { classes } = this.props;
     const { text } = this.state;
     return (
-      <form
-        className={classes.form}
-        onSubmit={e => this.handleSearch(e)}
-      >
+      <form className={classes.form} onSubmit={e => this.handleSearch(e)}>
         <IconButton
           className={classes.button}
           onClick={() => this.handleClose()}
@@ -149,12 +142,13 @@ class CollapsedAppSearch extends React.Component {
     const { className, classes } = this.props;
     const { open } = this.state;
     return (
-      <div className={[
-        open ? classes.open : '',
-        className ? className: ''
-      ].join(' ')}>
-        { this.renderSearchInput() }
-        { this.renderSearchButton() }
+      <div
+        className={[open ? classes.open : '', className ? className : ''].join(
+          ' '
+        )}
+      >
+        {this.renderSearchInput()}
+        {this.renderSearchButton()}
       </div>
     );
   }
