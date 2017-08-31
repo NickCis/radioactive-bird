@@ -22,3 +22,10 @@ Install it and run:
 yarn install
 yarn start
 ```
+
+Run Linters:
+```bash
+# First Prettier :)
+yarn run format
+yarn run lint
+```
