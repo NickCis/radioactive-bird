@@ -12,6 +12,7 @@
   },
   "jest": {
     "moduleNameMapper": {
+      "^~/{target}/(.*?)$": "<rootDir>/src/test/$1",
       "^~/(.*?)$": "<rootDir>/src/$1"
     }
   },

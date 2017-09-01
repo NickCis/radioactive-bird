@@ -26,7 +26,7 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
       static get propTypes() {
         return {
           route: PropTypes.object.isRequired,
-          __initialDataPages: PropTypes.func.isRequired,
+          __initialDataPages: PropTypes.array.isRequired,
           __dismissInitialData: PropTypes.func.isRequired,
         };
       }
