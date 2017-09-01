@@ -6,7 +6,7 @@ import {
   dismissInitialData,
 } from '../actions/initialData';
 
-const getRouteId = r => r.path || r.key;
+export const getRouteId = r => r.key || r.path || (() => {throw new Error('Routes must have either key or path in order to prevent double fetch!')})();
 
 export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
   const mapStateToPropsIsFunction = typeof mapStateToProps === 'function';
