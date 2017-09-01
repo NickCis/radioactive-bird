@@ -5,7 +5,7 @@ describe('initialData - Actions', () => {
     const path = 'test';
     const expectedAction = {
       type: actions.LOADED_INITIAL_DATA,
-      path
+      path,
     };
 
     expect(actions.setLoadedInitialData(path)).toEqual(expectedAction);
@@ -15,7 +15,7 @@ describe('initialData - Actions', () => {
     const path = 'test';
     const expectedAction = {
       type: actions.DISMISS_INITIAL_DATA,
-      path
+      path,
     };
 
     expect(actions.dismissInitialData(path)).toEqual(expectedAction);

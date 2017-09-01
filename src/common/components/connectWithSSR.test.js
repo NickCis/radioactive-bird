@@ -1,19 +1,16 @@
 import connectWithSSR, { getRouteId } from './connectWithSSR';
-import configureMockStore from 'redux-mock-store'
+import configureMockStore from 'redux-mock-store';
 import { setLoadedInitialData } from '../actions/initialData';
 
 describe('getRouteId', () => {
   it('shoud use `key` as the first option', () => {
-    expect(getRouteId({key: 'key', path: '/'}))
-      .toEqual('key');
+    expect(getRouteId({ key: 'key', path: '/' })).toEqual('key');
   });
   it('should use `path` as the second option', () => {
-    expect(getRouteId({path: '/'}))
-      .toEqual('/');
+    expect(getRouteId({ path: '/' })).toEqual('/');
   });
   it('should throw error it there are no `key` or `path`', () => {
-    expect(() => getRouteId({}))
-      .toThrow();
+    expect(() => getRouteId({})).toThrow();
   });
 });
 
@@ -28,14 +25,14 @@ describe('connectWithSSR', () => {
       return Promise.resolve(true);
     };
 
-    const store = mockStore({ initialData: { pages: [], }, });
+    const store = mockStore({ initialData: { pages: [] } });
 
     const hocComponent = connectWithSSR()(component);
 
     hocComponent.getInitialData({
       dispatch: d => store.dispatch(d),
       getState: () => store.getState(),
-      route: { key: 'test', },
+      route: { key: 'test' },
     });
 
     expect(isGetInitialDataCalled).toBeTruthy();

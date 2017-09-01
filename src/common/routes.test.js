@@ -5,8 +5,7 @@ const checkRoutes = routes => {
   routes.forEach(route => {
     getRouteId(route);
 
-    if (route.routes)
-      checkRoutes(route.routes);
+    if (route.routes) checkRoutes(route.routes);
   });
 };
 

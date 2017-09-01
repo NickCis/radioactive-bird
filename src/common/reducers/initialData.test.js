@@ -24,10 +24,13 @@ describe('initialData - reducers', () => {
 
   it('should handle DISMISS_INITIAL_DATA', () => {
     expect(
-      reducer({ pages: ['test'] }, {
-        type: DISMISS_INITIAL_DATA,
-        path: 'test',
-      })
+      reducer(
+        { pages: ['test'] },
+        {
+          type: DISMISS_INITIAL_DATA,
+          path: 'test',
+        }
+      )
     ).toEqual({
       pages: [],
     });
