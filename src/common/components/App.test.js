@@ -5,7 +5,6 @@ import { StaticRouter } from 'react-router';
 import { renderRoutes } from 'react-router-config';
 import routes from '~/common/routes';
 import configureStore from '~/common/store/configureStore';
-import App from './App';
 
 describe('<App />', () => {
   let render;
@@ -19,7 +18,7 @@ describe('<App />', () => {
   it('renders without crashing', () => {
     render(
       <Provider store={store}>
-        <StaticRouter location='/' context={{}}>
+        <StaticRouter location="/" context={{}}>
           {renderRoutes(routes)}
         </StaticRouter>
       </Provider>

@@ -1,3 +1,3 @@
 export const fetchCounter = () => {
-  return Promise.resolve({number: 1});
+  return Promise.resolve({ number: 1 });
 };
