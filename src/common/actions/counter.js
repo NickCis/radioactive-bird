@@ -39,8 +39,7 @@ export const fetch = () => (dispatch, getState) => {
     type: FETCH_COUNTER,
   });
 
-  return fetchCounter(getState())
-    .then(data => {
-      dispatch(set(data.number));
-    });
+  return fetchCounter(getState()).then(data => {
+    dispatch(set(data.number));
+  });
 };

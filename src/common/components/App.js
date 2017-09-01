@@ -26,8 +26,8 @@ const styles = theme => ({
 const App = ({ classes, route }) => (
   <div>
     <AppBar />
-    <Link to='/'>Home</Link>
-    <Link to='/asdasd'>Not Found</Link>
+    <Link to="/">Home</Link>
+    <Link to="/asdasd">Not Found</Link>
     {renderRoutes(route.routes)}
   </div>
 );

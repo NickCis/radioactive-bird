@@ -28,10 +28,12 @@ server
 
     // Get routes branch in order to preload data
     const branch = matchRoutes(routes, req.url);
-    const promises = branch.reduce((acc, b)  => {
+    const promises = branch.reduce((acc, b) => {
       const getInitialData = b.route.component.getInitialData;
       if (getInitialData)
-        acc = acc.concat(getInitialData({dispatch, getState, route: b.route}));
+        acc = acc.concat(
+          getInitialData({ dispatch, getState, route: b.route })
+        );
       return acc;
     }, []);
 
@@ -49,11 +51,8 @@ server
           <Provider store={store}>
             <JssProvider registry={sheetsRegistry} jss={jss}>
               <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
-                <StaticRouter
-                  location={req.url}
-                  context={context}
-                >
-                  { renderRoutes(routes) }
+                <StaticRouter location={req.url} context={context}>
+                  {renderRoutes(routes)}
                 </StaticRouter>
               </MuiThemeProvider>
             </JssProvider>
@@ -68,13 +67,10 @@ server
         // Delete the `req` property
         delete finalState.req;
 
-        if (context.status)
-          res.status(context.status);
+        if (context.status) res.status(context.status);
 
         if (context.url) {
-          res
-            .writeHead(301, { Location: context.url })
-            .end();
+          res.writeHead(301, { Location: context.url }).end();
           return;
         }
 
@@ -93,7 +89,8 @@ server
               ${css ? `<style id='jss-ssr'>${css}</style>` : ''}
               ${process.env.NODE_ENV === 'production'
                 ? `<script src="${assets.client.js}" defer></script>`
-                : `<script src="${assets.client.js}" defer crossorigin></script>`}
+                : `<script src="${assets.client
+                    .js}" defer crossorigin></script>`}
           </head>
           <body>
               <div id="root">${markup}</div>

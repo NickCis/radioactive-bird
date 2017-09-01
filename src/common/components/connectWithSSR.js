@@ -1,12 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setLoadedInitialData, dismissInitialData } from '../actions/initialData';
+import {
+  setLoadedInitialData,
+  dismissInitialData,
+} from '../actions/initialData';
 
 const getRouteId = r => r.path || r.key;
 
 export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
-  const mapStateToPropsIsFunction = typeof(mapStateToProps) === 'function';
-  const mapDispatchToPropsIsFunction = typeof(mapDispatchToProps) === 'function';
+  const mapStateToPropsIsFunction = typeof mapStateToProps === 'function';
+  const mapDispatchToPropsIsFunction = typeof mapDispatchToProps === 'function';
   const _mapStateToProps = state => ({
     ...(mapStateToPropsIsFunction ? mapStateToProps(state) : {}),
     __initialDataPages: state.initialData.pages,
@@ -19,10 +23,16 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
 
   return Page => {
     class ReduxSSR extends React.Component {
-      static getInitialData({dispatch, getState, route}) {
-        console.log('getInitialData');
-        if (!Page.getInitialData)
-          return Promise.resolve(null);
+      static get propTypes() {
+        return {
+          route: PropTypes.object.isRequired,
+          __initialDataPages: PropTypes.func.isRequired,
+          __dismissInitialData: PropTypes.func.isRequired,
+        };
+      }
+
+      static getInitialData({ dispatch, getState, route }) {
+        if (!Page.getInitialData) return Promise.resolve(null);
 
         const props = {
           route,
@@ -39,31 +49,29 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
       }
 
       componentDidMount() {
-        if (!Page.getInitialData)
-          return;
+        if (!Page.getInitialData) return;
 
         const { __initialDataPages, route } = this.props;
 
-        if (__initialDataPages.indexOf(getRouteId(route)) !== -1)
-          return;
+        if (__initialDataPages.indexOf(getRouteId(route)) !== -1) return;
 
-        console.log('fetch async!');
         Page.getInitialData(this.props);
       }
 
       componentWillUnmount() {
-        if (!Page.getInitialData)
-          return;
+        if (!Page.getInitialData) return;
 
         const { __dismissInitialData, route } = this.props;
         __dismissInitialData(getRouteId(route));
       }
 
       render() {
-        const { __initialDataPages, __dismissInitialData, ...props } = this.props;
-        return (
-          <Page {...props} />
-        );
+        const {
+          __initialDataPages, // eslint-disable-line no-unused-vars
+          __dismissInitialData, // eslint-disable-line no-unused-vars
+          ...props
+        } = this.props;
+        return <Page {...props} />;
       }
     }
 

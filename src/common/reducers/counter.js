@@ -1,6 +1,11 @@
-import { SET_COUNTER, INCREMENT_COUNTER, DECREMENT_COUNTER, FETCH_COUNTER } from '../actions/counter';
+import {
+  SET_COUNTER,
+  INCREMENT_COUNTER,
+  DECREMENT_COUNTER,
+  FETCH_COUNTER,
+} from '../actions/counter';
 
-const counter = (state = {loading: false, number: 0,}, action) => {
+const counter = (state = { loading: false, number: 0 }, action) => {
   switch (action.type) {
     case SET_COUNTER:
       return {

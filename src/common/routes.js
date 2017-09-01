@@ -9,11 +9,11 @@ const routes = [
       {
         component: Counter,
         path: '/',
-        exact: true
+        exact: true,
       },
       {
         component: NotFound,
-      }
+      },
     ],
   },
 ];
