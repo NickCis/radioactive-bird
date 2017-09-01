@@ -13,6 +13,9 @@ module.exports = {
       new NormalModuleReplacementPlugin(/^~/, resource => {
         resource.request = resource.request.replace(/^~/, path.join(config.context, 'src'));
       }),
+      new NormalModuleReplacementPlugin(/{target}/, resource => {
+        resource.request = resource.request.replace(/{target}/, targetToFolder[target]);
+      }),
     ]);
     return config;
   },

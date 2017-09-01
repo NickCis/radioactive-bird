@@ -24,7 +24,7 @@ const styles = {
       display: 'none',
     },
   },
-  '@media (min-width: 670px)': {
+  '@media (min-width: 671px)': {
     collapsedAppSearch: {
       visibility: 'hidden',
       display: 'none',

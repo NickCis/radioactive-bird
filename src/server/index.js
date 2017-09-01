@@ -1,16 +1,16 @@
 import configureStore from '../common/store/configureStore';
 import express from 'express';
-import { fetchCounter } from '../common/api/counter';
-import qs from 'qs';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
-
 import React from 'react';
 import { Provider } from 'react-redux';
-import App from '../common/components/App';
 import { JssProvider } from 'react-jss';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { sheetsManager, theme, sheetsRegistry, jss } from '../common/styles';
+import { matchRoutes, renderRoutes } from 'react-router-config';
+import { StaticRouter } from 'react-router';
+import routes from '~/common/routes';
+import api from './api';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -19,58 +19,91 @@ const server = express();
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
+  .use('/api', api)
   .get('/*', (req, res) => {
-    fetchCounter(apiResult => {
-      // Read the counter from the request, if provided
-      const params = qs.parse(req.query);
-      const counter = parseInt(params.counter, 10) || apiResult || 0;
+    // Create a new Redux store instance
+    const store = configureStore({ req });
+    const dispatch = act => store.dispatch(act);
+    const getState = () => store.getState();
 
-      // Compile an initial state
-      const preloadedState = { counter };
+    // Get routes branch in order to preload data
+    const branch = matchRoutes(routes, req.url);
+    const promises = branch.reduce((acc, b)  => {
+      const getInitialData = b.route.component.getInitialData;
+      if (getInitialData)
+        acc = acc.concat(getInitialData({dispatch, getState, route: b.route}));
+      return acc;
+    }, []);
 
-      // Create a new Redux store instance
-      const store = configureStore(preloadedState);
+    Promise.all(promises)
+      .catch(error => {
+        console.error('Error found while loading data');
+        console.error(error);
+      })
+      .then(d => {
+        // React Router context
+        const context = {};
 
-      // Render the component to a string
-      const markup = renderToString(
-        <Provider store={store}>
-          <JssProvider registry={sheetsRegistry} jss={jss}>
-            <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
-              <App />
-            </MuiThemeProvider>
-          </JssProvider>
-        </Provider>
-      );
+        // Render the component to a string
+        const markup = renderToString(
+          <Provider store={store}>
+            <JssProvider registry={sheetsRegistry} jss={jss}>
+              <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
+                <StaticRouter
+                  location={req.url}
+                  context={context}
+                >
+                  { renderRoutes(routes) }
+                </StaticRouter>
+              </MuiThemeProvider>
+            </JssProvider>
+          </Provider>
+        );
 
-      const css = sheetsRegistry.toString();
+        const css = sheetsRegistry.toString();
 
-      // Grab the initial state from our Redux store
-      const finalState = store.getState();
+        // Grab the initial state from our Redux store
+        const finalState = store.getState();
 
-      res.send(`<!doctype html>
-    <html lang="">
-    <head>
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta charSet='utf-8' />
-        <title>Razzle Redux Example</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500">
-        ${assets.client.css
-          ? `<link rel="stylesheet" href="${assets.client.css}">`
-          : ''}
-        ${css ? `<style id='jss-ssr'>${css}</style>` : ''}
-        ${process.env.NODE_ENV === 'production'
-          ? `<script src="${assets.client.js}" defer></script>`
-          : `<script src="${assets.client.js}" defer crossorigin></script>`}
-    </head>
-    <body>
-        <div id="root">${markup}</div>
-        <script>
-          window.__PRELOADED_STATE__ = ${serialize(finalState)}
-        </script>
-    </body>
-</html>`);
-    });
+        // Delete the `req` property
+        delete finalState.req;
+
+        if (context.status)
+          res.status(context.status);
+
+        if (context.url) {
+          res
+            .writeHead(301, { Location: context.url })
+            .end();
+          return;
+        }
+
+        res.send(
+          `<!doctype html>
+          <html lang="">
+          <head>
+              <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+              <meta charSet='utf-8' />
+              <title>Razzle Redux Example</title>
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500">
+              ${assets.client.css
+                ? `<link rel="stylesheet" href="${assets.client.css}">`
+                : ''}
+              ${css ? `<style id='jss-ssr'>${css}</style>` : ''}
+              ${process.env.NODE_ENV === 'production'
+                ? `<script src="${assets.client.js}" defer></script>`
+                : `<script src="${assets.client.js}" defer crossorigin></script>`}
+          </head>
+          <body>
+              <div id="root">${markup}</div>
+              <script>
+                window.__PRELOADED_STATE__ = ${serialize(finalState)}
+              </script>
+          </body>
+          </html>`
+        );
+      });
   });
 
 export default server;
