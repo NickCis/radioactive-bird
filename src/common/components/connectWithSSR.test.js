@@ -1,6 +1,9 @@
 import connectWithSSR, { getRouteId } from './connectWithSSR';
 import configureMockStore from 'redux-mock-store';
-import { setLoadedInitialData, dismissInitialData } from '../actions/initialData';
+import {
+  setLoadedInitialData,
+  dismissInitialData,
+} from '../actions/initialData';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
@@ -23,7 +26,7 @@ describe('connectWithSSR', () => {
     const Component = jest.fn().mockReturnValue(null);
     Component.getInitialData = jest.fn().mockReturnValue(Promise.resolve());
     return Component;
-  }
+  };
 
   it('should get initial data in SSR', () => {
     const Component = setup();
@@ -47,7 +50,7 @@ describe('connectWithSSR', () => {
 
     mount(
       <Provider store={store}>
-        <HocComponent route={{key: 'test'}}/>
+        <HocComponent route={{ key: 'test' }} />
       </Provider>
     );
 
@@ -61,7 +64,7 @@ describe('connectWithSSR', () => {
 
     mount(
       <Provider store={store}>
-        <HocComponent route={{key: 'test'}}/>
+        <HocComponent route={{ key: 'test' }} />
       </Provider>
     );
 
@@ -74,7 +77,7 @@ describe('connectWithSSR', () => {
 
     const wrapper = mount(
       <Provider store={store}>
-        <HocComponent route={{key: 'test'}}/>
+        <HocComponent route={{ key: 'test' }} />
       </Provider>
     );
 
