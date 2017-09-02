@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRender } from 'material-ui/test-utils';
 import AppBar from './';
+import { StaticRouter } from 'react-router-dom';
 
 describe('<AppBar />', () => {
   let render;
@@ -10,6 +11,10 @@ describe('<AppBar />', () => {
   });
 
   it('renders without crashing', () => {
-    render(<AppBar />);
+    render(
+      <StaticRouter location="" context={{}}>
+        <AppBar />
+      </StaticRouter>
+    );
   });
 });

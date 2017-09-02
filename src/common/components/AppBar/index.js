@@ -6,6 +6,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import ExpandedAppSearch from './ExpandedAppSearch';
 import CollapsedAppSearch from './CollapsedAppSearch';
+import { Link } from 'react-router-dom';
 
 const styles = {
   root: {
@@ -30,6 +31,10 @@ const styles = {
       display: 'none',
     },
   },
+  link: {
+    'text-decoration': 'none',
+    color: 'inherit',
+  },
 };
 
 const _AppBar = ({ classes }) => {
@@ -37,9 +42,11 @@ const _AppBar = ({ classes }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography type="title" color="inherit">
-            Radioactive Bird
-          </Typography>
+          <Link className={classes.link} to="/">
+            <Typography type="title" color="inherit">
+              Radioactive Bird
+            </Typography>
+          </Link>
           <ExpandedAppSearch
             className={classes.expandedAppSearch}
             onSearch={text => console.log(`Searched: ${text}`)}
