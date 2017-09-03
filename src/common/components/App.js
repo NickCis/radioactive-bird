@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '../components/AppBar';
 import { renderRoutes } from 'react-router-config';
-import { Link } from 'react-router-dom';
-
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
@@ -26,8 +24,6 @@ const styles = theme => ({
 const App = ({ classes, route }) => (
   <div>
     <AppBar />
-    <Link to="/">Home</Link>
-    <Link to="/asdasd">Not Found</Link>
     {renderRoutes(route.routes)}
   </div>
 );
