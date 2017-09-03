@@ -85,184 +85,181 @@ export default {
       lang: 'en',
     },
     {
-      "created_at": "Sun Sep 03 20:05:30 +0000 2017",
-      "id": 904435202432389120,
-      "id_str": "904435202432389120",
-      "text": "Con Trump a la cabeza, la comunidad internacional condenó a Corea del Norte https://t.co/hgxrEIQg1T https://t.co/Q4ugDV52Ze",
-      "truncated": false,
-      "entities": {
-        "hashtags": [],
-        "symbols": [],
-        "user_mentions": [],
-        "urls": [
+      created_at: 'Sun Sep 03 20:05:30 +0000 2017',
+      id: 904435202432389120,
+      id_str: '904435202432389120',
+      text:
+        'Con Trump a la cabeza, la comunidad internacional condenó a Corea del Norte https://t.co/hgxrEIQg1T https://t.co/Q4ugDV52Ze',
+      truncated: false,
+      entities: {
+        hashtags: [],
+        symbols: [],
+        user_mentions: [],
+        urls: [
           {
-            "url": "https://t.co/hgxrEIQg1T",
-            "expanded_url": "http://bit.ly/2vWJZij",
-            "display_url": "bit.ly/2vWJZij",
-            "indices": [
-              76,
-              99
-            ]
-          }
-        ],
-        "media": [
-          {
-            "id": 904435198976249856,
-            "id_str": "904435198976249856",
-            "indices": [
-              100,
-              123
-            ],
-            "media_url": "http://pbs.twimg.com/media/DI0zBYVW0AAyOmm.jpg",
-            "media_url_https": "https://pbs.twimg.com/media/DI0zBYVW0AAyOmm.jpg",
-            "url": "https://t.co/Q4ugDV52Ze",
-            "display_url": "pic.twitter.com/Q4ugDV52Ze",
-            "expanded_url": "https://twitter.com/Cronistacom/status/904435202432389120/photo/1",
-            "type": "photo",
-            "sizes": {
-              "medium": {
-                "w": 630,
-                "h": 315,
-                "resize": "fit"
-              },
-              "small": {
-                "w": 630,
-                "h": 315,
-                "resize": "fit"
-              },
-              "thumb": {
-                "w": 150,
-                "h": 150,
-                "resize": "crop"
-              },
-              "large": {
-                "w": 630,
-                "h": 315,
-                "resize": "fit"
-              }
-            }
-          }
-        ]
-      },
-      "extended_entities": {
-        "media": [
-          {
-            "id": 904435198976249856,
-            "id_str": "904435198976249856",
-            "indices": [
-              100,
-              123
-            ],
-            "media_url": "http://pbs.twimg.com/media/DI0zBYVW0AAyOmm.jpg",
-            "media_url_https": "https://pbs.twimg.com/media/DI0zBYVW0AAyOmm.jpg",
-            "url": "https://t.co/Q4ugDV52Ze",
-            "display_url": "pic.twitter.com/Q4ugDV52Ze",
-            "expanded_url": "https://twitter.com/Cronistacom/status/904435202432389120/photo/1",
-            "type": "photo",
-            "sizes": {
-              "medium": {
-                "w": 630,
-                "h": 315,
-                "resize": "fit"
-              },
-              "small": {
-                "w": 630,
-                "h": 315,
-                "resize": "fit"
-              },
-              "thumb": {
-                "w": 150,
-                "h": 150,
-                "resize": "crop"
-              },
-              "large": {
-                "w": 630,
-                "h": 315,
-                "resize": "fit"
-              }
-            }
-          }
-        ]
-      },
-      "source": "<a href=\"https://secure.echoboxapp.com\" rel=\"nofollow\">Echobox Social</a>",
-      "in_reply_to_status_id": null,
-      "in_reply_to_status_id_str": null,
-      "in_reply_to_user_id": null,
-      "in_reply_to_user_id_str": null,
-      "in_reply_to_screen_name": null,
-      "user": {
-        "id": 62806842,
-        "id_str": "62806842",
-        "name": "Cronistacom",
-        "screen_name": "Cronistacom",
-        "location": "Argentina",
-        "description": "Economía en tiempo real",
-        "url": "http://t.co/m5rM3TE45a",
-        "entities": {
-          "url": {
-            "urls": [
-              {
-                "url": "http://t.co/m5rM3TE45a",
-                "expanded_url": "http://www.Cronista.com",
-                "display_url": "Cronista.com",
-                "indices": [
-                  0,
-                  22
-                ]
-              }
-            ]
+            url: 'https://t.co/hgxrEIQg1T',
+            expanded_url: 'http://bit.ly/2vWJZij',
+            display_url: 'bit.ly/2vWJZij',
+            indices: [76, 99],
           },
-          "description": {
-            "urls": []
-          }
-        },
-        "protected": false,
-        "followers_count": 145481,
-        "friends_count": 4228,
-        "listed_count": 2051,
-        "created_at": "Tue Aug 04 12:42:29 +0000 2009",
-        "favourites_count": 262,
-        "utc_offset": -10800,
-        "time_zone": "Buenos Aires",
-        "geo_enabled": false,
-        "verified": true,
-        "statuses_count": 123959,
-        "lang": "es",
-        "contributors_enabled": false,
-        "is_translator": false,
-        "is_translation_enabled": false,
-        "profile_background_color": "709397",
-        "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/378800000082947056/91849db20c17d49267de814232abb027.png",
-        "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/378800000082947056/91849db20c17d49267de814232abb027.png",
-        "profile_background_tile": false,
-        "profile_image_url": "http://pbs.twimg.com/profile_images/433312698005078017/f2W4NDGb_normal.png",
-        "profile_image_url_https": "https://pbs.twimg.com/profile_images/433312698005078017/f2W4NDGb_normal.png",
-        "profile_banner_url": "https://pbs.twimg.com/profile_banners/62806842/1472003666",
-        "profile_link_color": "FF3300",
-        "profile_sidebar_border_color": "FFFFFF",
-        "profile_sidebar_fill_color": "FFF3E5",
-        "profile_text_color": "335273",
-        "profile_use_background_image": true,
-        "has_extended_profile": false,
-        "default_profile": false,
-        "default_profile_image": false,
-        "following": null,
-        "follow_request_sent": null,
-        "notifications": null,
-        "translator_type": "none"
+        ],
+        media: [
+          {
+            id: 904435198976249856,
+            id_str: '904435198976249856',
+            indices: [100, 123],
+            media_url: 'http://pbs.twimg.com/media/DI0zBYVW0AAyOmm.jpg',
+            media_url_https: 'https://pbs.twimg.com/media/DI0zBYVW0AAyOmm.jpg',
+            url: 'https://t.co/Q4ugDV52Ze',
+            display_url: 'pic.twitter.com/Q4ugDV52Ze',
+            expanded_url:
+              'https://twitter.com/Cronistacom/status/904435202432389120/photo/1',
+            type: 'photo',
+            sizes: {
+              medium: {
+                w: 630,
+                h: 315,
+                resize: 'fit',
+              },
+              small: {
+                w: 630,
+                h: 315,
+                resize: 'fit',
+              },
+              thumb: {
+                w: 150,
+                h: 150,
+                resize: 'crop',
+              },
+              large: {
+                w: 630,
+                h: 315,
+                resize: 'fit',
+              },
+            },
+          },
+        ],
       },
-      "geo": null,
-      "coordinates": null,
-      "place": null,
-      "contributors": null,
-      "is_quote_status": false,
-      "retweet_count": 1,
-      "favorite_count": 11,
-      "favorited": false,
-      "retweeted": false,
-      "possibly_sensitive": false,
-      "possibly_sensitive_appealable": false,
-      "lang": "es"
+      extended_entities: {
+        media: [
+          {
+            id: 904435198976249856,
+            id_str: '904435198976249856',
+            indices: [100, 123],
+            media_url: 'http://pbs.twimg.com/media/DI0zBYVW0AAyOmm.jpg',
+            media_url_https: 'https://pbs.twimg.com/media/DI0zBYVW0AAyOmm.jpg',
+            url: 'https://t.co/Q4ugDV52Ze',
+            display_url: 'pic.twitter.com/Q4ugDV52Ze',
+            expanded_url:
+              'https://twitter.com/Cronistacom/status/904435202432389120/photo/1',
+            type: 'photo',
+            sizes: {
+              medium: {
+                w: 630,
+                h: 315,
+                resize: 'fit',
+              },
+              small: {
+                w: 630,
+                h: 315,
+                resize: 'fit',
+              },
+              thumb: {
+                w: 150,
+                h: 150,
+                resize: 'crop',
+              },
+              large: {
+                w: 630,
+                h: 315,
+                resize: 'fit',
+              },
+            },
+          },
+        ],
+      },
+      source:
+        '<a href="https://secure.echoboxapp.com" rel="nofollow">Echobox Social</a>',
+      in_reply_to_status_id: null,
+      in_reply_to_status_id_str: null,
+      in_reply_to_user_id: null,
+      in_reply_to_user_id_str: null,
+      in_reply_to_screen_name: null,
+      user: {
+        id: 62806842,
+        id_str: '62806842',
+        name: 'Cronistacom',
+        screen_name: 'Cronistacom',
+        location: 'Argentina',
+        description: 'Economía en tiempo real',
+        url: 'http://t.co/m5rM3TE45a',
+        entities: {
+          url: {
+            urls: [
+              {
+                url: 'http://t.co/m5rM3TE45a',
+                expanded_url: 'http://www.Cronista.com',
+                display_url: 'Cronista.com',
+                indices: [0, 22],
+              },
+            ],
+          },
+          description: {
+            urls: [],
+          },
+        },
+        protected: false,
+        followers_count: 145481,
+        friends_count: 4228,
+        listed_count: 2051,
+        created_at: 'Tue Aug 04 12:42:29 +0000 2009',
+        favourites_count: 262,
+        utc_offset: -10800,
+        time_zone: 'Buenos Aires',
+        geo_enabled: false,
+        verified: true,
+        statuses_count: 123959,
+        lang: 'es',
+        contributors_enabled: false,
+        is_translator: false,
+        is_translation_enabled: false,
+        profile_background_color: '709397',
+        profile_background_image_url:
+          'http://pbs.twimg.com/profile_background_images/378800000082947056/91849db20c17d49267de814232abb027.png',
+        profile_background_image_url_https:
+          'https://pbs.twimg.com/profile_background_images/378800000082947056/91849db20c17d49267de814232abb027.png',
+        profile_background_tile: false,
+        profile_image_url:
+          'http://pbs.twimg.com/profile_images/433312698005078017/f2W4NDGb_normal.png',
+        profile_image_url_https:
+          'https://pbs.twimg.com/profile_images/433312698005078017/f2W4NDGb_normal.png',
+        profile_banner_url:
+          'https://pbs.twimg.com/profile_banners/62806842/1472003666',
+        profile_link_color: 'FF3300',
+        profile_sidebar_border_color: 'FFFFFF',
+        profile_sidebar_fill_color: 'FFF3E5',
+        profile_text_color: '335273',
+        profile_use_background_image: true,
+        has_extended_profile: false,
+        default_profile: false,
+        default_profile_image: false,
+        following: null,
+        follow_request_sent: null,
+        notifications: null,
+        translator_type: 'none',
+      },
+      geo: null,
+      coordinates: null,
+      place: null,
+      contributors: null,
+      is_quote_status: false,
+      retweet_count: 1,
+      favorite_count: 11,
+      favorited: false,
+      retweeted: false,
+      possibly_sensitive: false,
+      possibly_sensitive_appealable: false,
+      lang: 'es',
     },
     {
       created_at: 'Sat Sep 02 14:39:44 +0000 2017',

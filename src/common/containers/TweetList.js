@@ -43,7 +43,7 @@ export class TweetList extends React.Component {
       <div className={classes.loading}>
         <CircularProgress />
       </div>
-    )
+    );
   }
 
   render() {

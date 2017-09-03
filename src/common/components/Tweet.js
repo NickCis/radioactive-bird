@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
+import Card, {
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+} from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
@@ -37,7 +42,7 @@ const styles = theme => ({
 class Tweet extends React.Component {
   getCardHeaderTitle() {
     const { name, screen_name } = this.props.tweet.user;
-    return `${name} @${screen_name}`;
+    return `${name} @${screen_name}`; // eslint-disable-line camelcase
   }
 
   getCardHeaderSubHeader() {
@@ -51,17 +56,16 @@ class Tweet extends React.Component {
   }
 
   getCardHeaderAvatar() {
-    const { classes, tweet: { user: { name, profile_image_url, screen_name } } } = this.props;
-    if (profile_image_url) {
-      const url = profile_image_url.replace(/^https?:/, '');
-      return (
-        <Avatar alt={name} src={url} />
-      );
+    const { classes, tweet: { user } } = this.props;
+
+    if (user['profile_image_url']) {
+      const url = user['profile_image_url'].replace(/^https?:/, '');
+      return <Avatar alt={user['name']} src={url} />;
     }
 
     return (
-      <Avatar alt={name} className={classes.avatar}>
-        { screen_name[0] }
+      <Avatar alt={user['name']} className={classes.avatar}>
+        {user['screen_name'][0]}
       </Avatar>
     );
   }
@@ -70,19 +74,13 @@ class Tweet extends React.Component {
     const { classes, tweet: { text } } = this.props;
     const url = media.media_url.replace(/^https?:/, '');
     return (
-        <CardMedia
-          key={i}
-          className={classes.media}
-          image={url}
-          title={text}
-        />
+      <CardMedia key={i} className={classes.media} image={url} title={text} />
     );
   }
 
   getCardMedia() {
     const { media } = this.props.tweet.entities || {};
-    if (! media)
-      return null;
+    if (!media) return null;
 
     return media.map((m, i) => {
       switch (m.type) {
@@ -93,12 +91,11 @@ class Tweet extends React.Component {
           console.log(`Unknown media type: ${m.type}`);
           return null;
       }
-
     });
   }
 
   render() {
-    const { classes, className, tweet: { favorite_count, retweet_count, text } } = this.props;
+    const { classes, className, tweet } = this.props;
 
     return (
       <Card className={[classes.card, className ? className : ''].join(' ')}>
@@ -107,24 +104,18 @@ class Tweet extends React.Component {
           title={this.getCardHeaderTitle()}
           subheader={this.getCardHeaderSubHeader()}
         />
-        { this.getCardMedia() }
+        {this.getCardMedia()}
         <CardContent>
-          <Typography component="p">
-            { text }
-          </Typography>
+          <Typography component="p">{tweet['text']}</Typography>
         </CardContent>
         <CardActions disableActionSpacing>
           <IconButton className={classes.actionButton}>
             <FavoriteIcon />
-            <Typography type="caption">
-              { favorite_count }
-            </Typography>
+            <Typography type="caption">{tweet['favorite_count']}</Typography>
           </IconButton>
           <IconButton className={classes.actionButton}>
             <ShareIcon />
-            <Typography type="caption">
-              { retweet_count }
-            </Typography>
+            <Typography type="caption">{tweet['retweet_count']}</Typography>
           </IconButton>
           <div className={classes.flexGrow} />
           <IconButton aria-label="Go to Tweet">
