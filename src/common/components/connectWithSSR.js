@@ -38,11 +38,12 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
         };
       }
 
-      static getInitialData({ dispatch, getState, route }) {
+      static getInitialData({ dispatch, getState, route, match }) {
         if (!Page.getInitialData) return Promise.resolve(null);
 
         const props = {
           route,
+          match,
         };
         if (mapStateToPropsIsFunction)
           Object.assign(props, mapStateToProps(getState()));

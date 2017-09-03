@@ -32,7 +32,7 @@ server
       const getInitialData = b.route.component.getInitialData;
       if (getInitialData)
         acc = acc.concat(
-          getInitialData({ dispatch, getState, route: b.route })
+          getInitialData({ dispatch, getState, route: b.route, match: b.match })
         );
       return acc;
     }, []);
