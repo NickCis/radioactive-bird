@@ -6,7 +6,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import ExpandedAppSearch from './ExpandedAppSearch';
 import CollapsedAppSearch from './CollapsedAppSearch';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 const styles = {
   root: {
@@ -37,7 +37,8 @@ const styles = {
   },
 };
 
-const _AppBar = ({ classes }) => {
+const _AppBar = ({ classes, history }) => {
+  const search = t => history.push(`/search/${t}`);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -49,11 +50,11 @@ const _AppBar = ({ classes }) => {
           </Link>
           <ExpandedAppSearch
             className={classes.expandedAppSearch}
-            onSearch={text => console.log(`Searched: ${text}`)}
+            onSearch={search}
           />
           <CollapsedAppSearch
             className={classes.collapsedAppSearch}
-            onSearch={text => console.log(`Collapsed Searched: ${text}`)}
+            onSearch={search}
           />
         </Toolbar>
       </AppBar>
@@ -63,6 +64,9 @@ const _AppBar = ({ classes }) => {
 
 _AppBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
 };
 
-export default withStyles(styles)(_AppBar);
+export default withStyles(styles)(withRouter(_AppBar));
