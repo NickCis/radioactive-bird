@@ -14,7 +14,8 @@
     "moduleNameMapper": {
       "^~/{target}/(.*?)$": "<rootDir>/src/test/$1",
       "^~/(.*?)$": "<rootDir>/src/$1"
-    }
+    },
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "dependencies": {
     "express": "^4.15.2",
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "enzyme": "^2.9.1",
+    "enzyme-to-json": "^1.5.1",
     "eslint": "^4.5.0",
     "eslint-config-google": "^0.9.1",
     "eslint-config-prettier": "^2.3.0",

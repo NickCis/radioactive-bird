@@ -5,8 +5,17 @@ import connectWithSSR from '../components/connectWithSSR';
 import { searchTweets } from '../actions/tweets';
 import { CircularProgress } from 'material-ui/Progress';
 import { withRouter } from 'react-router-dom';
+import Tweet from '../components/Tweet';
 
-const styles = {};
+const styles = {
+  tweet: {
+    margin: '0 auto',
+  },
+  loading: {
+    width: '100%',
+    'text-align': 'center',
+  },
+};
 
 class TweetList extends React.Component {
   static get propTypes() {
@@ -14,6 +23,7 @@ class TweetList extends React.Component {
       searchTweets: PropTypes.func.isRequired,
       loading: PropTypes.bool.isRequired,
       tweets: PropTypes.array.isRequired,
+      classes: PropTypes.object.isRequired,
     };
   }
 
@@ -25,22 +35,23 @@ class TweetList extends React.Component {
   }
 
   loading() {
-    return <CircularProgress />;
+    const { classes } = this.props;
+    return (
+      <div className={classes.loading}>
+        <CircularProgress />
+      </div>
+    )
   }
 
   render() {
-    const { loading, tweets } = this.props;
+    const { loading, tweets, classes } = this.props;
     if (loading) return this.loading();
 
     return (
       <div>
-        <ul>
-          {tweets.map(t => (
-            <li key={t.id}>
-              {t.user.name}: {t.text}
-            </li>
-          ))}
-        </ul>
+        {tweets.map(t => (
+          <Tweet key={t.id} className={classes.tweet} tweet={t} />
+        ))}
       </div>
     );
   }
