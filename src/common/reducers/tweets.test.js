@@ -20,7 +20,7 @@ describe('tweets - reducers', () => {
           statuses: [tweet],
         },
       })
-    ).toEqual({[tweet.id]: tweet});
+    ).toEqual({ [tweet.id]: tweet });
   });
 
   it('should handle FETCH_TWEET', () => {
@@ -29,7 +29,7 @@ describe('tweets - reducers', () => {
         type: FETCH_TWEET,
         id: 'test',
       })
-    ).toEqual({test: { loading: true }});
+    ).toEqual({ test: { loading: true } });
   });
 
   it('should handle FINISHED_FETCHING_TWEET', () => {
@@ -40,7 +40,7 @@ describe('tweets - reducers', () => {
         payload: tweet,
         id: tweet.id,
       })
-    ).toEqual({[tweet.id]: tweet});
+    ).toEqual({ [tweet.id]: tweet });
   });
   it('should handle ERROR_FETCHING_TWEET', () => {
     expect(
@@ -49,6 +49,6 @@ describe('tweets - reducers', () => {
         error: {},
         id: 'test',
       })
-    ).toEqual({test: {isError: true, error: {}}});
+    ).toEqual({ test: { isError: true, error: {} } });
   });
 });

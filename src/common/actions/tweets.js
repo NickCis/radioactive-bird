@@ -1,4 +1,7 @@
-import { searchTweets as searchTweetsProtocol, fetchTweet as fetchTweetProtocol } from '~/{target}/protocol';
+import {
+  searchTweets as searchTweetsProtocol,
+  fetchTweet as fetchTweetProtocol,
+} from '~/{target}/protocol';
 
 export const SEARCH_TWEETS = 'SEARCH_TWEETS';
 export const FINISHED_SEARCHING_TWEETS = 'FINISHED_SEARCHING_TWEETS';
@@ -30,7 +33,7 @@ export const searchTweets = query => {
         });
       });
   };
-}
+};
 
 export const fetchTweet = id => {
   return (dispatch, getState) => {
@@ -55,4 +58,4 @@ export const fetchTweet = id => {
         });
       });
   };
-}
+};

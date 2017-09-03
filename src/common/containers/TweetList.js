@@ -6,18 +6,18 @@ import { searchTweets } from '../actions/tweets';
 import { CircularProgress } from 'material-ui/Progress';
 import { withRouter } from 'react-router-dom';
 
-const styles = {
-};
+const styles = {};
 
 class TweetList extends React.Component {
   static get propTypes() {
     return {
       searchTweets: PropTypes.func.isRequired,
       loading: PropTypes.bool.isRequired,
+      tweets: PropTypes.array.isRequired,
     };
   }
 
-  static getInitialData({match, searchTweets}) {
+  static getInitialData({ match, searchTweets }) {
     if (!match || !match.params || !match.params.query)
       return Promise.resolve();
 
@@ -35,9 +35,11 @@ class TweetList extends React.Component {
     return (
       <div>
         <ul>
-          { tweets.map(t => (
-            <li key={t.id}>{t.user.name}: {t.text}</li>
-          )) }
+          {tweets.map(t => (
+            <li key={t.id}>
+              {t.user.name}: {t.text}
+            </li>
+          ))}
         </ul>
       </div>
     );

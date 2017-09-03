@@ -7,7 +7,11 @@ import {
 
 describe('search - reducers', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual({loading: false, result: [], metadata: {}});
+    expect(reducer(undefined, {})).toEqual({
+      loading: false,
+      result: [],
+      metadata: {},
+    });
   });
 
   it('should handle SEARCH_TWEETS', () => {
@@ -16,7 +20,7 @@ describe('search - reducers', () => {
         type: SEARCH_TWEETS,
         query: 'test',
       })
-    ).toEqual({loading: true, metadata: {}, result: []});
+    ).toEqual({ loading: true, metadata: {}, result: [] });
   });
 
   it('should handle FINISHED_SEARCHING_TWEETS', () => {
@@ -26,10 +30,10 @@ describe('search - reducers', () => {
         type: FINISHED_SEARCHING_TWEETS,
         payload: {
           statuses: [tweet],
-          search_metadata: {}
+          search_metadata: {},
         },
       })
-    ).toEqual({loading: false, metadata: {}, result: [tweet.id]});
+    ).toEqual({ loading: false, metadata: {}, result: [tweet.id] });
   });
 
   it('should handle ERROR_SEARCHING_TWEETS', () => {
@@ -38,6 +42,12 @@ describe('search - reducers', () => {
         type: ERROR_SEARCHING_TWEETS,
         error: {},
       })
-    ).toEqual({loading: false, metadata: {}, result: [], isError: true, error: {}});
+    ).toEqual({
+      loading: false,
+      metadata: {},
+      result: [],
+      isError: true,
+      error: {},
+    });
   });
 });

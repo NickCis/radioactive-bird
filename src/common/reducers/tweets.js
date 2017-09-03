@@ -5,7 +5,7 @@ import {
   ERROR_FETCHING_TWEET,
 } from '../actions/tweets';
 
-export default (state={}, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case FINISHED_SEARCHING_TWEETS:
       return {
@@ -13,7 +13,7 @@ export default (state={}, action) => {
         ...action.payload.statuses.reduce((acc, ele) => {
           acc[ele.id] = ele;
           return acc;
-        }, {})
+        }, {}),
       };
 
     case FINISHED_FETCHING_TWEET:
@@ -42,4 +42,4 @@ export default (state={}, action) => {
     default:
       return state;
   }
-}
+};

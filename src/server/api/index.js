@@ -12,7 +12,6 @@ router.get('/counter', (req, res) => {
   }, 500);
 });
 
-
 router.get('/search/:query', (req, res) => {
   setTimeout(() => {
     res.json(searchStubResponse);
@@ -20,7 +19,7 @@ router.get('/search/:query', (req, res) => {
 });
 
 router.use((req, res) => {
-  res.status(404).json({error: 'Not found', code: 404});
+  res.status(404).json({ error: 'Not found', code: 404 });
 });
 
 export default router;

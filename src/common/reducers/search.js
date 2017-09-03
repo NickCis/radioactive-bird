@@ -4,7 +4,10 @@ import {
   ERROR_SEARCHING_TWEETS,
 } from '../actions/tweets';
 
-export default (state={loading: false, result: [], metadata: {}}, action) => {
+export default (
+  state = { loading: false, result: [], metadata: {} },
+  action
+) => {
   switch (action.type) {
     case SEARCH_TWEETS:
       return {
@@ -32,4 +35,4 @@ export default (state={loading: false, result: [], metadata: {}}, action) => {
     default:
       return state;
   }
-}
+};
