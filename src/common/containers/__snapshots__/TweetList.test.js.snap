@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TweetList /> renders TweetList correctly - empty list 1`] = `
+<div
+  class="TweetList-wrapper-1"
+/>
+`;
+
+exports[`<TweetList /> renders TweetList correctly - loading 1`] = `
+<div
+  class="TweetList-loading-3"
+>
+  <div
+    class="MuiCircularProgress-root-4 MuiCircularProgress-primaryColor-5"
+    role="progressbar"
+    style="width:40px;height:40px;"
+  >
+    <svg
+      class="MuiCircularProgress-svg-7 MuiCircularProgress-indeterminateSvg-8"
+      viewbox="0 0 40 40"
+    >
+      <circle
+        class="MuiCircularProgress-circle-9 MuiCircularProgress-indeterminateCircle-10"
+        cx="20"
+        cy="20"
+        fill="none"
+        r="18.2"
+        stroke-miterlimit="20"
+        stroke-width="3.6"
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`<TweetList /> renders TweetList correctly - with tweets 1`] = `
+<div
+  class="TweetList-wrapper-1"
+>
+  <div
+    class="MuiPaper-root-18 MuiPaper-shadow2-22 MuiPaper-rounded-19 Tweet-card-12 TweetList-tweet-2"
+  >
+    <div
+      class="MuiCardContent-root-50 MuiCardHeader-root-45"
+    >
+      <div
+        class="MuiCardHeader-avatar-46"
+      >
+        <div
+          class="MuiAvatar-root-51 MuiAvatar-colorDefault-52 Tweet-avatar-15"
+        >
+          t
+        </div>
+      </div>
+      <div
+        class="MuiCardHeader-content-47"
+      >
+        <span
+          class="MuiTypography-root-54 MuiTypography-body2-62 MuiCardHeader-title-48"
+        >
+          Test @test
+        </span>
+        <span
+          class="MuiTypography-root-54 MuiTypography-body2-62 MuiTypography-colorSecondary-74 MuiCardHeader-subheader-49"
+        >
+          September 3, 2017
+        </span>
+      </div>
+    </div>
+    <div
+      class="MuiCardContent-root-50"
+    >
+      <p
+        class="MuiTypography-root-54 MuiTypography-body1-63"
+      >
+        test
+      </p>
+    </div>
+    <div
+      class="MuiCardActions-root-76"
+    >
+      <button
+        class="MuiButtonBase-root-87 MuiIconButton-root-78 Tweet-actionButton-17"
+        role="button"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label-84"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root-89"
+            focusable="false"
+            viewbox="0 0 24 24"
+          >
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+            />
+          </svg>
+          <span
+            class="MuiTypography-root-54 MuiTypography-caption-64"
+          >
+            0
+          </span>
+        </span>
+        <span
+          class="MuiTouchRipple-root-90"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root-87 MuiIconButton-root-78 Tweet-actionButton-17"
+        role="button"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label-84"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root-89"
+            focusable="false"
+            viewbox="0 0 24 24"
+          >
+            <path
+              d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
+            />
+          </svg>
+          <span
+            class="MuiTypography-root-54 MuiTypography-caption-64"
+          >
+            0
+          </span>
+        </span>
+        <span
+          class="MuiTouchRipple-root-90"
+        />
+      </button>
+      <div
+        class="Tweet-flexGrow-16"
+      />
+      <button
+        aria-label="Go to Tweet"
+        class="MuiButtonBase-root-87 MuiIconButton-root-78"
+        role="button"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label-84"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root-89"
+            focusable="false"
+            viewbox="0 0 24 24"
+          >
+            <path
+              d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"
+            />
+          </svg>
+        </span>
+        <span
+          class="MuiTouchRipple-root-90"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

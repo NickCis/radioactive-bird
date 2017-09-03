@@ -8,6 +8,9 @@ import { withRouter } from 'react-router-dom';
 import Tweet from '../components/Tweet';
 
 const styles = {
+  wrapper: {
+    margin: '15px',
+  },
   tweet: {
     margin: '0 auto',
   },
@@ -17,7 +20,7 @@ const styles = {
   },
 };
 
-class TweetList extends React.Component {
+export class TweetList extends React.Component {
   static get propTypes() {
     return {
       searchTweets: PropTypes.func.isRequired,
@@ -48,7 +51,7 @@ class TweetList extends React.Component {
     if (loading) return this.loading();
 
     return (
-      <div>
+      <div className={classes.wrapper}>
         {tweets.map(t => (
           <Tweet key={t.id} className={classes.tweet} tweet={t} />
         ))}
