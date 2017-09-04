@@ -22,7 +22,7 @@ export default class Twitter {
     this.bearerToken = bearerToken;
     this.authPromise = undefined;
 
-    if (! ((consumerKey && consumerSecret) || bearerToken))
+    if (!((consumerKey && consumerSecret) || bearerToken))
       console.error('Error: No twitter auth credentials were set');
   }
 

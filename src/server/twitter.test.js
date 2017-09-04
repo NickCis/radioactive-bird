@@ -1,6 +1,6 @@
 jest.mock('isomorphic-fetch');
 import fetch from 'isomorphic-fetch';
-import Twitter, { toBase64, buildUrl, buildUrlWithQuery }  from './twitter';
+import Twitter, { toBase64, buildUrl, buildUrlWithQuery } from './twitter';
 
 describe('Twitter helper functions', () => {
   it('toBase64 :: should create valid base64 string', () => {
@@ -12,7 +12,9 @@ describe('Twitter helper functions', () => {
   });
 
   it('buildUrlWithQuery :: should create valid url with query', () => {
-    expect( buildUrlWithQuery({a: 'a'}, 'a', 'b', 'c')).toBe('https://api.twitter.com/a/b/c?a=a');
+    expect(buildUrlWithQuery({ a: 'a' }, 'a', 'b', 'c')).toBe(
+      'https://api.twitter.com/a/b/c?a=a'
+    );
   });
 });
 
@@ -22,7 +24,10 @@ describe('Twitter', () => {
   });
 
   it('_buildBasicAuth :: should create valid Basic Auth', () => {
-    const twitter = new Twitter({consumerKey: 'test', consumerSecret: 'test'});
+    const twitter = new Twitter({
+      consumerKey: 'test',
+      consumerSecret: 'test',
+    });
     expect(twitter._buildBasicAuth()).toBe('Basic dGVzdDp0ZXN0');
   });
 
@@ -31,7 +36,10 @@ describe('Twitter', () => {
       access_token: 'test',
     };
 
-    const twitter = new Twitter({consumerKey: 'test', consumerSecret: 'test'});
+    const twitter = new Twitter({
+      consumerKey: 'test',
+      consumerSecret: 'test',
+    });
     fetch.mockImplementation((url, options) => {
       expect(url).toBe('https://api.twitter.com/oauth2/token');
       expect(options).toMatchObject({
@@ -55,7 +63,10 @@ describe('Twitter', () => {
   });
 
   it('auth :: should not double auth while perfoming', () => {
-    const twitter = new Twitter({consumerKey: 'test', consumerSecret: 'test'});
+    const twitter = new Twitter({
+      consumerKey: 'test',
+      consumerSecret: 'test',
+    });
     const promise = new Promise(jest.fn());
     twitter.authPromise = promise;
     expect(twitter.auth()).toBe(promise);
@@ -65,7 +76,7 @@ describe('Twitter', () => {
   it('_authorizedFetch :: should make calls with bearer token', () => {
     const url = 'test';
     const json = {};
-    const twitter = new Twitter({bearerToken: 'test'});
+    const twitter = new Twitter({ bearerToken: 'test' });
     fetch.mockImplementation((u, opts) => {
       expect(u).toBe(url);
       expect(opts).toMatchObject({
@@ -83,14 +94,19 @@ describe('Twitter', () => {
   });
 
   it('_authorizedFetch :: should fail when there is no bearer token', () => {
-    const twitter = new Twitter({consumerKey: 'test', consumerSecret: 'test'});
-    return expect(twitter._authorizedFetch()).rejects.toMatchObject({errors: expect.any(Array)});
+    const twitter = new Twitter({
+      consumerKey: 'test',
+      consumerSecret: 'test',
+    });
+    return expect(twitter._authorizedFetch()).rejects.toMatchObject({
+      errors: expect.any(Array),
+    });
   });
 
   it('_authorizedFetch :: should fail when response status != 200', () => {
     const url = 'test';
     const json = {};
-    const twitter = new Twitter({bearerToken: 'test'});
+    const twitter = new Twitter({ bearerToken: 'test' });
     fetch.mockImplementation((u, opts) => {
       return Promise.resolve({
         status: 500,
@@ -102,8 +118,8 @@ describe('Twitter', () => {
 
   it('search :: should make correct call', () => {
     const query = 'test';
-    const json = {query};
-    const twitter = new Twitter({bearerToken: 'test'});
+    const json = { query };
+    const twitter = new Twitter({ bearerToken: 'test' });
 
     fetch.mockImplementation(u => {
       expect(u).toBe(
@@ -112,7 +128,7 @@ describe('Twitter', () => {
       return Promise.resolve({
         status: 200,
         json: jest.fn().mockReturnValue(json),
-      })
+      });
     });
 
     return expect(twitter.search(query)).resolves.toBe(json);
@@ -120,17 +136,15 @@ describe('Twitter', () => {
 
   it('getTweet :: should make correct call', () => {
     const id = 'test';
-    const json = {id};
-    const twitter = new Twitter({bearerToken: 'test'});
+    const json = { id };
+    const twitter = new Twitter({ bearerToken: 'test' });
 
     fetch.mockImplementation(u => {
-      expect(u).toBe(
-        `https://api.twitter.com/1.1/statuses/show.json?id=${id}`
-      );
+      expect(u).toBe(`https://api.twitter.com/1.1/statuses/show.json?id=${id}`);
       return Promise.resolve({
         status: 200,
         json: jest.fn().mockReturnValue(json),
-      })
+      });
     });
 
     return expect(twitter.getTweet(id)).resolves.toBe(json);
