@@ -12,6 +12,8 @@ export default (
     case SEARCH_TWEETS:
       return {
         ...state,
+        isError: false,
+        error: undefined,
         metadata: {},
         loading: true,
       };

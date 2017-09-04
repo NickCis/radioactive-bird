@@ -27,8 +27,26 @@ yarn start
 ```
 
 Run Linters:
+
 ```bash
 # First Prettier :)
 yarn run format
 yarn run lint
 ```
+
+### Configuration
+
+Environment variables:
+
+* `RAZZLE_CONSUMER_KEY`: Twitter consumer Key
+* `RAZZLE_CONSUMER_SECRET`: Twitter Consumer secret
+
+Razzle uses _Dotenv_ configuration, the easyest way is to create a `.env` file on the root directory:
+
+```bash
+cat .env
+RAZZLE_CONSUMER_KEY=XXXXXXX
+RAZZLE_CONSUMER_SECRET=XXXXXX
+```
+
+**Note:** Razzle uses webpack to inyect the environment variables values into the source code, this _isn't the best idea_ but for the scope of this example works correctly.

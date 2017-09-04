@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
 import initialData from './initialData';
 import tweets from './tweets';
 import search from './search';
@@ -7,7 +6,6 @@ import search from './search';
 const rootReducer = combineReducers({
   // XXX: in order to get req in SSR
   req: s => s || false,
-  counter,
   initialData,
   tweets,
   search,

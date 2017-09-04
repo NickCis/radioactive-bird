@@ -15,10 +15,13 @@
       "^~/{target}/(.*?)$": "<rootDir>/src/test/$1",
       "^~/(.*?)$": "<rootDir>/src/$1"
     },
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "dependencies": {
     "express": "^4.15.2",
+    "isomorphic-fetch": "^2.2.1",
     "material-ui": "^1.0.0-beta.6",
     "material-ui-icons": "^1.0.0-beta.5",
     "prop-types": "^15.5.8",

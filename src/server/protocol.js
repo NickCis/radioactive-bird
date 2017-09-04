@@ -1,22 +1,18 @@
-import searchStubResponse from './api/searchStubResponse';
+import { client } from './api';
 
-export const fetchCounter = () => {
-  return new Promise(rs => {
-    console.log('SSR Fetch counter');
-    rs({
-      number: Math.round(Math.random() * 1000),
-    });
-  });
-};
+const getClient = () => {
+  if (client.bearerToken)
+    return Promise.resolve(client);
+
+  return client.auth();
+}
 
 export const searchTweets = query => {
-  return new Promise(rs => {
-    rs(searchStubResponse);
-  });
+  return getClient()
+    .then(twitter => twitter.search(query))
 };
 
 export const fetchTweet = id => {
-  return new Promise(rs => {
-    rs(searchStubResponse.statuses[0]);
-  });
+  return getClient()
+    .then(twitter => twitter.getTweet(id));
 };
