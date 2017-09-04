@@ -6,6 +6,9 @@ import { searchTweets } from '../actions/tweets';
 import { CircularProgress } from 'material-ui/Progress';
 import { withRouter } from 'react-router-dom';
 import Tweet from '../components/Tweet';
+import NotIdealState from '../components/NotIdealState';
+import SentimentVeryDissatisfied from 'material-ui-icons/SentimentVeryDissatisfied';
+import BugReport from 'material-ui-icons/BugReport';
 
 const styles = {
   wrapper: {
@@ -28,6 +31,8 @@ export class TweetList extends React.Component {
       loading: PropTypes.bool.isRequired,
       tweets: PropTypes.array.isRequired,
       classes: PropTypes.object.isRequired,
+      isError: PropTypes.bool,
+      error: PropTypes.object,
     };
   }
 
@@ -38,7 +43,7 @@ export class TweetList extends React.Component {
     return searchTweets(match.params.query);
   }
 
-  loading() {
+  renderLoading() {
     const { classes } = this.props;
     return (
       <div className={classes.loading}>
@@ -47,9 +52,38 @@ export class TweetList extends React.Component {
     );
   }
 
+  renderEmpty() {
+    return (
+      <NotIdealState
+        headline="Empty result"
+        subheading="The search you have performed returned empty"
+        Icon={SentimentVeryDissatisfied}
+      />
+    );
+  }
+
+  renderError() {
+    const { error } = this.props;
+    let errorText = 'An error was encountered while performing the search';
+
+    if (error && error.errors && error.errors[0] && error.errors[0].message)
+      errorText = error.errors[0].message;
+
+    return (
+      <NotIdealState
+        headline="Error"
+        subheading={errorText}
+        Icon={BugReport}
+      />
+    )
+  }
+
   render() {
-    const { loading, tweets, classes } = this.props;
-    if (loading) return this.loading();
+    const { loading, isError, tweets, classes } = this.props;
+    if (loading) return this.renderLoading();
+    if (isError) return this.renderError();
+    if (tweets.length === 0)
+      return this.renderEmpty();
 
     return (
       <div className={classes.wrapper}>
@@ -63,6 +97,8 @@ export class TweetList extends React.Component {
 
 const mapStateToProps = state => ({
   loading: state.search.loading,
+  isError: state.search.isError,
+  error: state.search.error,
   tweets: state.search.result.map(id => state.tweets[id]),
 });
 

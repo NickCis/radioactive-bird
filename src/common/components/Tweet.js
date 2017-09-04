@@ -142,7 +142,7 @@ Tweet.propTypes = {
       name: PropTypes.string.isRequired,
       screen_name: PropTypes.string.isRequired,
       profile_image_url: PropTypes.string,
-    }),
+    }).isRequired,
     favorite_count: PropTypes.number.isRequired,
     retweet_count: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
@@ -150,7 +150,7 @@ Tweet.propTypes = {
     entities: PropTypes.shape({
       media: PropTypes.array,
     }),
-  }),
+  }).isRequired,
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
   hideLink: PropTypes.bool,

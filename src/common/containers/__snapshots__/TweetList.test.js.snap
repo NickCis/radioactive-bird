@@ -2,8 +2,29 @@
 
 exports[`<TweetList /> renders TweetList correctly - empty list 1`] = `
 <div
-  class="TweetList-wrapper-1"
-/>
+  class="NotIdealState-wrapper-12"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root-16 NotIdealState-icon-13"
+    focusable="false"
+    viewbox="0 0 24 24"
+  >
+    <path
+      d="M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10S22 17.53 22 12 17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm4.18-12.24l-1.06 1.06-1.06-1.06L13 8.82l1.06 1.06L13 10.94 14.06 12l1.06-1.06L16.18 12l1.06-1.06-1.06-1.06 1.06-1.06zM7.82 12l1.06-1.06L9.94 12 11 10.94 9.94 9.88 11 8.82 9.94 7.76 8.88 8.82 7.82 7.76 6.76 8.82l1.06 1.06-1.06 1.06zM12 14c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5z"
+    />
+  </svg>
+  <h1
+    class="MuiTypography-root-17 MuiTypography-display1-21 NotIdealState-headline-14"
+  >
+    Empty result
+  </h1>
+  <h3
+    class="MuiTypography-root-17 MuiTypography-subheading-24 NotIdealState-subheading-15"
+  >
+    The search you have performed returned empty
+  </h3>
+</div>
 `;
 
 exports[`<TweetList /> renders TweetList correctly - loading 1`] = `
@@ -38,59 +59,59 @@ exports[`<TweetList /> renders TweetList correctly - with tweets 1`] = `
   class="TweetList-wrapper-1"
 >
   <div
-    class="MuiPaper-root-19 MuiPaper-shadow2-23 MuiPaper-rounded-20 Tweet-card-12 TweetList-tweet-2"
+    class="MuiPaper-root-46 MuiPaper-shadow2-50 MuiPaper-rounded-47 Tweet-card-39 TweetList-tweet-2"
   >
     <div
-      class="MuiCardContent-root-51 MuiCardHeader-root-46"
+      class="MuiCardContent-root-78 MuiCardHeader-root-73"
     >
       <div
-        class="MuiCardHeader-avatar-47"
+        class="MuiCardHeader-avatar-74"
       >
         <div
-          class="MuiAvatar-root-52 MuiAvatar-colorDefault-53 Tweet-avatar-15"
+          class="MuiAvatar-root-79 MuiAvatar-colorDefault-80 Tweet-avatar-42"
         >
           t
         </div>
       </div>
       <div
-        class="MuiCardHeader-content-48"
+        class="MuiCardHeader-content-75"
       >
         <span
-          class="MuiTypography-root-55 MuiTypography-body2-63 MuiCardHeader-title-49"
+          class="MuiTypography-root-17 MuiTypography-body2-25 MuiCardHeader-title-76"
         >
           Test @test
         </span>
         <span
-          class="MuiTypography-root-55 MuiTypography-body2-63 MuiTypography-colorSecondary-75 MuiCardHeader-subheader-50"
+          class="MuiTypography-root-17 MuiTypography-body2-25 MuiTypography-colorSecondary-37 MuiCardHeader-subheader-77"
         >
           September 3, 2017
         </span>
       </div>
     </div>
     <div
-      class="MuiCardContent-root-51"
+      class="MuiCardContent-root-78"
     >
       <p
-        class="MuiTypography-root-55 MuiTypography-body1-64"
+        class="MuiTypography-root-17 MuiTypography-body1-26"
       >
         test
       </p>
     </div>
     <div
-      class="MuiCardActions-root-77"
+      class="MuiCardActions-root-82"
     >
       <button
-        class="MuiButtonBase-root-88 MuiIconButton-root-79 Tweet-actionButton-17"
+        class="MuiButtonBase-root-93 MuiIconButton-root-84 Tweet-actionButton-44"
         role="button"
         tabindex="0"
         type="button"
       >
         <span
-          class="MuiIconButton-label-85"
+          class="MuiIconButton-label-90"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root-90"
+            class="MuiSvgIcon-root-16"
             focusable="false"
             viewbox="0 0 24 24"
           >
@@ -99,27 +120,27 @@ exports[`<TweetList /> renders TweetList correctly - with tweets 1`] = `
             />
           </svg>
           <span
-            class="MuiTypography-root-55 MuiTypography-caption-65"
+            class="MuiTypography-root-17 MuiTypography-caption-27"
           >
             0
           </span>
         </span>
         <span
-          class="MuiTouchRipple-root-91"
+          class="MuiTouchRipple-root-95"
         />
       </button>
       <button
-        class="MuiButtonBase-root-88 MuiIconButton-root-79 Tweet-actionButton-17"
+        class="MuiButtonBase-root-93 MuiIconButton-root-84 Tweet-actionButton-44"
         role="button"
         tabindex="0"
         type="button"
       >
         <span
-          class="MuiIconButton-label-85"
+          class="MuiIconButton-label-90"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root-90"
+            class="MuiSvgIcon-root-16"
             focusable="false"
             viewbox="0 0 24 24"
           >
@@ -128,35 +149,35 @@ exports[`<TweetList /> renders TweetList correctly - with tweets 1`] = `
             />
           </svg>
           <span
-            class="MuiTypography-root-55 MuiTypography-caption-65"
+            class="MuiTypography-root-17 MuiTypography-caption-27"
           >
             0
           </span>
         </span>
         <span
-          class="MuiTouchRipple-root-91"
+          class="MuiTouchRipple-root-95"
         />
       </button>
       <div
-        class="Tweet-flexGrow-16"
+        class="Tweet-flexGrow-43"
       />
       <button
         aria-label="Go to Tweet"
-        class="MuiButtonBase-root-88 MuiIconButton-root-79"
+        class="MuiButtonBase-root-93 MuiIconButton-root-84"
         role="button"
         tabindex="0"
         type="button"
       >
         <span
-          class="MuiIconButton-label-85"
+          class="MuiIconButton-label-90"
         >
           <a
-            class="Tweet-link-18"
+            class="Tweet-link-45"
             href="/tweet/test"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root-90"
+              class="MuiSvgIcon-root-16"
               focusable="false"
               viewbox="0 0 24 24"
             >
@@ -167,7 +188,7 @@ exports[`<TweetList /> renders TweetList correctly - with tweets 1`] = `
           </a>
         </span>
         <span
-          class="MuiTouchRipple-root-91"
+          class="MuiTouchRipple-root-95"
         />
       </button>
     </div>
