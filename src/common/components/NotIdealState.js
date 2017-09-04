@@ -21,14 +21,14 @@ const styles = theme => ({
   },
 });
 
-export const NotIdealState = ({classes, headline, subheading, Icon}) => (
+export const NotIdealState = ({ classes, headline, subheading, Icon }) => (
   <div className={classes.wrapper}>
     <Icon className={classes.icon} />
     <Typography type="display1" className={classes.headline}>
-      { headline }
+      {headline}
     </Typography>
     <Typography type="subheading" className={classes.subheading}>
-      { subheading }
+      {subheading}
     </Typography>
   </div>
 );
