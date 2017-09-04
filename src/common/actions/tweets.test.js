@@ -69,8 +69,7 @@ describe('tweets - Actions', () => {
     __setCallingFunction('fetchTweet', fetchTweet);
 
     const store = mockStore({
-      tweets: {
-      },
+      tweets: {},
     });
 
     return store.dispatch(actions.fetchTweetIfNeeded('test')).then(() => {

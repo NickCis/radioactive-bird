@@ -123,13 +123,13 @@ class Tweet extends React.Component {
             <Typography type="caption">{tweet['retweet_count']}</Typography>
           </IconButton>
           <div className={classes.flexGrow} />
-          { !hideLink && (
+          {!hideLink && (
             <IconButton aria-label="Go to Tweet">
               <Link className={classes.link} to={`/tweet/${tweet.id}`}>
                 <LinkIcon />
               </Link>
             </IconButton>
-          ) }
+          )}
         </CardActions>
       </Card>
     );

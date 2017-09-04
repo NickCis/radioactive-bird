@@ -62,9 +62,8 @@ export const fetchTweet = id => {
 
 export const fetchTweetIfNeeded = id => {
   return (dispatch, getState) => {
-    if (getState().tweets[id])
-      return Promise.resolve();
+    if (getState().tweets[id]) return Promise.resolve();
 
-    return dispatch(fetchTweet(id))
+    return dispatch(fetchTweet(id));
   };
 };

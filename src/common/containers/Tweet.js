@@ -22,9 +22,8 @@ const styles = {
 };
 
 export class Tweet extends React.Component {
-  static getInitialData({fetchTweetIfNeeded, match}) {
-    if (!match || !match.params || !match.params.id)
-      return Promise.resolve();
+  static getInitialData({ fetchTweetIfNeeded, match }) {
+    if (!match || !match.params || !match.params.id) return Promise.resolve();
 
     return fetchTweetIfNeeded(match.params.id);
   }
@@ -34,13 +33,13 @@ export class Tweet extends React.Component {
       match: PropTypes.object.isRequired,
       tweets: PropTypes.object.isRequired,
       fetchTweetIfNeeded: PropTypes.func.isRequired,
+      classes: PropTypes.object.isRequired,
     };
   }
 
   isLoading() {
     const tweet = this.getTweet();
-    if (! tweet)
-      return true;
+    if (!tweet) return true;
 
     return tweet.loading;
   }
@@ -64,12 +63,15 @@ export class Tweet extends React.Component {
 
   render() {
     const { classes } = this.props;
-    if (this.isLoading())
-      return this.renderLoading();
+    if (this.isLoading()) return this.renderLoading();
 
     return (
       <div className={classes.wrapper}>
-        <TweetComponent className={classes.tweet} tweet={this.getTweet()} hideLink={true}/>
+        <TweetComponent
+          className={classes.tweet}
+          tweet={this.getTweet()}
+          hideLink={true}
+        />
       </div>
     );
   }
@@ -81,9 +83,13 @@ const mapStateToProps = state => ({
   tweets: state.tweets,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchTweetIfNeeded,
-  fetchTweet,
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchTweetIfNeeded,
+      fetchTweet,
+    },
+    dispatch
+  );
 
 export default connectWithSSR(mapStateToProps, mapDispatchToProps)(StyledTweet);
