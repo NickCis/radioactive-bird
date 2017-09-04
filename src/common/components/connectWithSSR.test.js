@@ -6,17 +6,23 @@ import {
 } from '../actions/initialData';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { MemoryRouter as Router } from 'react-router';
+import { renderRoutes } from 'react-router-config';
 import { mount } from 'enzyme';
 
 describe('getRouteId', () => {
-  it('shoud use `key` as the first option', () => {
-    expect(getRouteId({ key: 'key', path: '/' })).toEqual('key');
+  it('shoud call `Page.getRouteId` as the first option', () => {
+    const Page = { getRouteId: jest.fn().mockReturnValue('test') };
+    expect(getRouteId(Page, {}, {})).toEqual('test');
+    expect(Page.getRouteId.mock.calls.length).toBe(1);
   });
-  it('should use `path` as the second option', () => {
-    expect(getRouteId({ path: '/' })).toEqual('/');
+
+  it('shoud use `key` as the second option', () => {
+    expect(getRouteId({}, { key: 'key', path: '/' }, {})).toEqual('key');
   });
-  it('should throw error it there are no `key` or `path`', () => {
-    expect(() => getRouteId({})).toThrow();
+
+  it('should use build a complex key', () => {
+    expect(getRouteId({}, { path: '/' }, { url: 'test' })).toEqual('Component / test');
   });
 });
 
@@ -37,6 +43,7 @@ describe('connectWithSSR', () => {
       dispatch: d => store.dispatch(d),
       getState: () => store.getState(),
       route: { key: 'test' },
+      match: { url: 'test' },
     });
 
     expect(Component.getInitialData.mock.calls.length).toBe(1);
@@ -50,21 +57,25 @@ describe('connectWithSSR', () => {
 
     mount(
       <Provider store={store}>
-        <HocComponent route={{ key: 'test' }} />
+        <Router>
+          <HocComponent route={{ key: 'test' }} match={{ url: 'test' }}/>
+        </Router>
       </Provider>
     );
 
     expect(Component.getInitialData.mock.calls.length).toBe(1);
   });
 
-  it('should call getInitialData on web if the data was brought in SSR (no double fetch)', () => {
+  it('should not call getInitialData on web if the data was brought in SSR (no double fetch)', () => {
     const Component = setup();
     const store = mockStore({ initialData: { pages: ['test'] } });
     const HocComponent = connectWithSSR()(Component);
 
     mount(
       <Provider store={store}>
-        <HocComponent route={{ key: 'test' }} />
+        <Router>
+          <HocComponent route={{ key: 'test' }} match={{ url: 'test' }}/>
+        </Router>
       </Provider>
     );
 
@@ -77,11 +88,61 @@ describe('connectWithSSR', () => {
 
     const wrapper = mount(
       <Provider store={store}>
-        <HocComponent route={{ key: 'test' }} />
+        <Router>
+          <HocComponent route={{ key: 'test' }} match={{ url: 'test' }}/>
+        </Router>
       </Provider>
     );
 
     wrapper.unmount();
     expect(store.getActions()).toEqual([dismissInitialData('test')]);
+  });
+
+  it('should not call getInitialData on web if changed props create same key (no double fetch)', () => {
+    const Component = setup();
+    const store = mockStore({ initialData: { pages: [] } });
+    const HocComponent = connectWithSSR()(Component);
+    const Wrapper = ({route, match}) => (
+      <Provider store={store}>
+        <Router>
+           <HocComponent route={route} match={match} />
+        </Router>
+      </Provider>
+    );
+
+    const wrapper = mount(
+      <Wrapper route={{ key: 'test' }} match={{ url: 'test' }} />
+    );
+
+    wrapper.setProps({
+      route: { key: 'test' },
+      match: { url: 'test' },
+    });
+
+    expect(Component.getInitialData.mock.calls.length).toBe(1);
+  });
+
+  it('should call getInitialData on web if changed props create diferent key', () => {
+    const Component = setup();
+    const store = mockStore({ initialData: { pages: [] } });
+    const HocComponent = connectWithSSR()(Component);
+    const Wrapper = ({route, match}) => (
+      <Provider store={store}>
+        <Router>
+           <HocComponent route={route} match={match} />
+        </Router>
+      </Provider>
+    );
+
+    const wrapper = mount(
+      <Wrapper route={{ key: 'test' }} match={{ url: 'test' }} />
+    );
+
+    wrapper.setProps({
+      route: { key: 'test-new' },
+      match: { url: 'test' },
+    });
+
+    expect(Component.getInitialData.mock.calls.length).toBe(2);
   });
 });
