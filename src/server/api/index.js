@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import Twitter from '../twitter';
 
+const getProcess = () => process;
+
 const router = new Router();
 export const client = new Twitter({
   consumerKey:
-    process.env.TWITTER_CONSUMER_KEY || process.env.RAZZLE_CONSUMER_KEY,
+    getProcess()['env'].TWITTER_CONSUMER_KEY || process.env.RAZZLE_CONSUMER_KEY,
   consumerSecret:
-    process.env.TWITTER_CONSUMER_SECRET || process.env.RAZZLE_CONSUMER_SECRET,
+    getProcess()['env'].TWITTER_CONSUMER_SECRET || process.env.RAZZLE_CONSUMER_SECRET,
 });
 
 router.use((req, res, next) => {

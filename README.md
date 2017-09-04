@@ -20,11 +20,18 @@ Packages / Libraries used:
 
 ## How to use
 
-Install it and run:
+Install it and run (development):
 
 ```bash
 yarn install
 yarn start
+```
+
+Run (production):
+
+```bash
+yarn build
+yarn start:prod
 ```
 
 Run Linters:
@@ -39,15 +46,23 @@ yarn run lint
 
 Environment variables:
 
-* `RAZZLE_CONSUMER_KEY`: Twitter consumer Key
-* `RAZZLE_CONSUMER_SECRET`: Twitter Consumer secret
+* `RAZZLE_CONSUMER_KEY`: Twitter consumer Key (Overrided in runtime by `TWITTER_CONSUMER_KEY`)
+* `RAZZLE_CONSUMER_SECRET`: Twitter Consumer secret (Overrided in runtime by `TWITTER_CONSUMER_SECRET`)
 
-Razzle uses _Dotenv_ configuration, the easyest way is to create a `.env` file on the root directory:
+Razzle uses _Dotenv_ configuration, the easyest way is to create a `.env.local` file on the root directory:
 
 ```bash
-cat .env
+cat .env.local
 RAZZLE_CONSUMER_KEY=XXXXXXX
 RAZZLE_CONSUMER_SECRET=XXXXXX
 ```
 
 **Note:** Razzle uses webpack to inyect the environment variables values into the source code, this _isn't the best idea_ but for the scope of this example works correctly.
+
+## Deploy to `now`
+
+1. Login: `yarn now login`
+2. Add secrets:
+  * `yarn now secrets add twitter-consumer-key KEY`
+  * `yarn now secrets add twitter-consumer-secret SECRET`
+3. Deploy: `yarn now -e TWITTER_CONSUMER_KEY=@twitter-consumer-key -e TWITTER_CONSUMER_SECRET=@twitter-consumer-secret`
