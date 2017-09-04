@@ -1,8 +1,6 @@
 jest.mock('./api');
-
 import { client as clientMock } from './api';
-
-const { searchTweets, fetchTweet } = require('./protocol');
+import { searchTweets, fetchTweet } from './protocol';
 
 describe('Server Protocol - searchTweets', () => {
   beforeEach(() => {

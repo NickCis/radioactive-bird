@@ -12,6 +12,8 @@ Twitter.mockImplementation(() => {
   return twitterMock;
 });
 
+// As `import` is babel-transpiled, it is reordered.
+// In order to implement the mock before actually requiring it, `require` has to be used.
 const { default: api } = require('./index');
 
 let response;
