@@ -16,6 +16,7 @@ Packages / Libraries used:
 * [Jest](https://github.com/facebook/jest): [BSD 3-Clause License](https://github.com/facebook/jest/blob/master/LICENSE)
 * [Prettier](https://github.com/prettier/prettier): [MIT License](https://github.com/prettier/prettier/blob/master/LICENSE)
 * [EsLint](https://github.com/eslint/eslint): [MIT License](https://github.com/eslint/eslint/blob/master/LICENSE)
+* [Enzyme](https://github.com/airbnb/enzyme): [MIT Lincense](https://github.com/airbnb/enzyme/blob/master/LICENSE.md)
 
 ## How to use
 
