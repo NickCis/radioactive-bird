@@ -65,4 +65,4 @@ RAZZLE_CONSUMER_SECRET=XXXXXX
 2. Add secrets:
   * `yarn now secrets add twitter-consumer-key KEY`
   * `yarn now secrets add twitter-consumer-secret SECRET`
-3. Deploy: `yarn now -e TWITTER_CONSUMER_KEY=@twitter-consumer-key -e TWITTER_CONSUMER_SECRET=@twitter-consumer-secret`
+3. Deploy: `yarn now`
