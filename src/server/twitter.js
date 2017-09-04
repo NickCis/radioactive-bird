@@ -6,7 +6,14 @@ const V1_1 = ['1.1'];
 const Search = V1_1.concat(['search', 'tweets.json']);
 const Tweet = V1_1.concat(['statuses', 'show.json']);
 
-const toBase64 = b => new Buffer(b || '').toString('base64');
+export const toBase64 = b => new Buffer(b || '').toString('base64');
+export const buildUrl = (...params) => [BaseUrl].concat(params).join('/');
+export const buildUrlWithQuery = (query, ...params) => {
+  const q = Object.keys(query)
+    .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(query[k])}`)
+    .join('&');
+  return `${buildUrl(...params)}?${q}`;
+};
 
 export default class Twitter {
   constructor({ consumerKey, consumerSecret, bearerToken } = {}) {
@@ -14,17 +21,9 @@ export default class Twitter {
     this.consumerSecret = consumerSecret;
     this.bearerToken = bearerToken;
     this.authPromise = undefined;
-  }
 
-  _buildUrl(...params) {
-    return [BaseUrl].concat(params).join('/');
-  }
-
-  _buildUrlWithQuery(query, ...params) {
-    const q = Object.keys(query)
-      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(query[k])}`)
-      .join('&');
-    return `${this._buildUrl(...params)}?${q}`;
+    if (! ((consumerKey && consumerSecret) || bearerToken))
+      console.error('Error: No twitter auth credentials were set');
   }
 
   _buildBasicAuth() {
@@ -34,7 +33,7 @@ export default class Twitter {
     return `Basic ${toBase64(credentials)}`;
   }
 
-  _authFetch(url, options = {}) {
+  _authorizedFetch(url, options = {}) {
     if (!this.bearerToken) {
       return Promise.reject({
         errors: [{ message: 'Twitter authentication error' }],
@@ -57,7 +56,7 @@ export default class Twitter {
 
   auth() {
     if (this.authPromise) return this.authPromise;
-    return (this.authPromise = fetch(this._buildUrl(...OAuth), {
+    return (this.authPromise = fetch(buildUrl(...OAuth), {
       method: 'POST',
       body: 'grant_type=client_credentials',
       headers: {
@@ -82,8 +81,8 @@ export default class Twitter {
   }
 
   search(query) {
-    return this._authFetch(
-      this._buildUrlWithQuery(
+    return this._authorizedFetch(
+      buildUrlWithQuery(
         {
           q: query,
         },
@@ -93,8 +92,8 @@ export default class Twitter {
   }
 
   getTweet(id) {
-    return this._authFetch(
-      this._buildUrlWithQuery(
+    return this._authorizedFetch(
+      buildUrlWithQuery(
         {
           id,
         },
