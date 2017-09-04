@@ -126,7 +126,7 @@ class CollapsedAppSearch extends React.Component {
           ref={i => (this.searchInput = i)}
           className={classes.input}
           value={text}
-          placeholder="Buscar"
+          placeholder="Search"
           onChange={e => this.handleChange(e)}
         />
         {text.length ? (

@@ -119,7 +119,7 @@ class ExpandedAppSearch extends React.Component {
           onBlur={() => this.handleBlur()}
           value={text}
           className={classes.input}
-          placeholder="Buscar"
+          placeholder="Search"
           onChange={e => this.handleChange(e)}
         />
         {text.length ? (
