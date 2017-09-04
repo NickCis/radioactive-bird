@@ -20,7 +20,7 @@ describe('search - reducers', () => {
         type: SEARCH_TWEETS,
         query: 'test',
       })
-    ).toEqual({ loading: true, metadata: {}, result: [] });
+    ).toEqual({ error: undefined, isError: false, loading: true, metadata: {}, result: [] });
   });
 
   it('should handle FINISHED_SEARCHING_TWEETS', () => {
