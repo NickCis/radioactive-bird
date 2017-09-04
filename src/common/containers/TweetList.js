@@ -4,7 +4,6 @@ import { withStyles } from 'material-ui/styles';
 import connectWithSSR from '../components/connectWithSSR';
 import { searchTweets } from '../actions/tweets';
 import { CircularProgress } from 'material-ui/Progress';
-import { withRouter } from 'react-router-dom';
 import Tweet from '../components/Tweet';
 import NotIdealState from '../components/NotIdealState';
 import SentimentVeryDissatisfied from 'material-ui-icons/SentimentVeryDissatisfied';
@@ -102,6 +101,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export const StyledTweetList = withStyles(styles)(TweetList);
-export default withRouter(
-  connectWithSSR(mapStateToProps, mapDispatchToProps)(StyledTweetList)
-);
+export default connectWithSSR(mapStateToProps, mapDispatchToProps)(StyledTweetList);

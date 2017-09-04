@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   setLoadedInitialData,
   dismissInitialData,
 } from '../actions/initialData';
 
-export const getRouteId = r =>
-  r.key ||
-  r.path ||
-  (() => {
-    throw new Error(
-      'Routes must have either key or path in order to prevent double fetch!'
-    );
-  })();
+export const getRouteId = (Page, route, match) => {
+  if (Page.getRouteId)
+    return Page.getRouteId({route, match});
+
+  if (route.key)
+    return route.key;
+
+  return [getDisplayName(Page), route.path, match.url].filter(e => e).join(' ');
+}
 
 export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
   const mapStateToPropsIsFunction = typeof mapStateToProps === 'function';
@@ -51,26 +53,52 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
         if (mapDispatchToPropsIsFunction)
           Object.assign(props, mapDispatchToProps(dispatch));
 
-        dispatch(setLoadedInitialData(getRouteId(route)));
+        dispatch(setLoadedInitialData(getRouteId(Page, route, match)));
 
         return Page.getInitialData(props);
       }
 
+      fetchDataIfNeeded({nextRoute, nextMatch}={}) {
+        if (!Page.getInitialData) return;
+        const { __initialDataPages, route, match } = this.props;
+
+        if (__initialDataPages.indexOf(getRouteId(Page, nextRoute || route, nextMatch || match)) !== -1)
+          return;
+
+        Page.getInitialData({
+          ...this.props,
+          route: nextRoute,
+          match: nextMatch,
+        });
+      }
+
       componentDidMount() {
+        this.fetchDataIfNeeded();
+      }
+
+      componentWillReceiveProps({route: nextRoute, match: nextMatch}) {
         if (!Page.getInitialData) return;
 
-        const { __initialDataPages, route } = this.props;
+        const { route, match } = this.props;
+        const key = getRouteId(Page, route, match);
+        const nextKey = getRouteId(Page, nextRoute, nextMatch);
 
-        if (__initialDataPages.indexOf(getRouteId(route)) !== -1) return;
+        if (key === nextKey)
+          return;
 
-        Page.getInitialData(this.props);
+        this.dismissInitialData();
+        this.fetchDataIfNeeded({nextRoute, nextMatch});
+      }
+
+      dismissInitialData() {
+        if (!Page.getInitialData) return;
+
+        const { __dismissInitialData, route, match } = this.props;
+        __dismissInitialData(getRouteId(Page, route, match));
       }
 
       componentWillUnmount() {
-        if (!Page.getInitialData) return;
-
-        const { __dismissInitialData, route } = this.props;
-        __dismissInitialData(getRouteId(route));
+        this.dismissInitialData();
       }
 
       render() {
@@ -85,7 +113,7 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
 
     ReduxSSR.displayName = `SSR(${getDisplayName(Page)})`;
 
-    return connect(_mapStateToProps, _mapDispatchToProps)(ReduxSSR);
+    return withRouter(connect(_mapStateToProps, _mapDispatchToProps)(ReduxSSR));
   };
 }
 
