@@ -9,7 +9,7 @@ const Tweet = V1_1.concat(['statuses', 'show.json']);
 const toBase64 = b => new Buffer(b || '').toString('base64');
 
 export default class Twitter {
-  constructor({consumerKey, consumerSecret, bearerToken}={}) {
+  constructor({ consumerKey, consumerSecret, bearerToken } = {}) {
     this.consumerKey = consumerKey;
     this.consumerSecret = consumerSecret;
     this.bearerToken = bearerToken;
@@ -34,10 +34,10 @@ export default class Twitter {
     return `Basic ${toBase64(credentials)}`;
   }
 
-  _authFetch(url, options={}) {
+  _authFetch(url, options = {}) {
     if (!this.bearerToken) {
       return Promise.reject({
-        errors: [{message: 'Twitter authentication error'}],
+        errors: [{ message: 'Twitter authentication error' }],
       });
     }
 
@@ -48,33 +48,27 @@ export default class Twitter {
         Accept: 'application/json',
       },
       ...options,
-    })
-      .then(r => {
-        if (r.status === 200)
-          return r.json();
+    }).then(r => {
+      if (r.status === 200) return r.json();
 
-        return r.json()
-          .then(json => Promise.reject(json));
-      });
+      return r.json().then(json => Promise.reject(json));
+    });
   }
 
   auth() {
-    if (this.authPromise)
-      return this.authPromise;
-    return this.authPromise = fetch(this._buildUrl(...OAuth), {
+    if (this.authPromise) return this.authPromise;
+    return (this.authPromise = fetch(this._buildUrl(...OAuth), {
       method: 'POST',
       body: 'grant_type=client_credentials',
       headers: {
         Authorization: this._buildBasicAuth(),
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      }
+      },
     })
       .then(r => {
-        if (r.status === 200)
-          return r.json();
+        if (r.status === 200) return r.json();
 
-        return r.json()
-          .then(json => Promise.reject(json));
+        return r.json().then(json => Promise.reject(json));
       })
       .then(json => {
         this.bearerToken = json['access_token'];
@@ -84,18 +78,28 @@ export default class Twitter {
       .catch(err => {
         this.authPromise = undefined;
         return Promise.reject(err);
-      });
+      }));
   }
 
   search(query) {
-    return this._authFetch(this._buildUrlWithQuery({
-      q: query,
-    }, ...Search));
+    return this._authFetch(
+      this._buildUrlWithQuery(
+        {
+          q: query,
+        },
+        ...Search
+      )
+    );
   }
 
   getTweet(id) {
-    return this._authFetch(this._buildUrlWithQuery({
-      id,
-    }, ...Tweet));
+    return this._authFetch(
+      this._buildUrlWithQuery(
+        {
+          id,
+        },
+        ...Tweet
+      )
+    );
   }
 }

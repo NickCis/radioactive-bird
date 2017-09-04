@@ -3,8 +3,10 @@ import Twitter from '../twitter';
 
 const router = new Router();
 export const client = new Twitter({
-  consumerKey: process.env.TWITTER_CONSUMER_KEY || process.env.RAZZLE_CONSUMER_KEY,
-  consumerSecret: process.env.TWITTER_CONSUMER_SECRET || process.env.RAZZLE_CONSUMER_SECRET,
+  consumerKey:
+    process.env.TWITTER_CONSUMER_KEY || process.env.RAZZLE_CONSUMER_KEY,
+  consumerSecret:
+    process.env.TWITTER_CONSUMER_SECRET || process.env.RAZZLE_CONSUMER_SECRET,
 });
 
 router.use((req, res, next) => {
@@ -14,7 +16,8 @@ router.use((req, res, next) => {
     return;
   }
 
-  client.auth()
+  client
+    .auth()
     .then(() => {
       req.twitter = client;
       next();
@@ -27,7 +30,8 @@ router.use((req, res, next) => {
 });
 
 router.get('/search/:query', (req, res, next) => {
-  req.twitter.search(req.params.query)
+  req.twitter
+    .search(req.params.query)
     .then(json => res.json(json))
     .catch(err => {
       const error = new Error(err);
@@ -37,7 +41,8 @@ router.get('/search/:query', (req, res, next) => {
 });
 
 router.get('/tweet/:id', (req, res, next) => {
-  req.twitter.getTweet(req.params.id)
+  req.twitter
+    .getTweet(req.params.id)
     .then(json => res.json(json))
     .catch(err => {
       const error = new Error(err);
@@ -47,12 +52,13 @@ router.get('/tweet/:id', (req, res, next) => {
 });
 
 router.use((req, res) => {
-  res.status(404).json({errors: [{message: 'Not found', code: 404 }]});
+  res.status(404).json({ errors: [{ message: 'Not found', code: 404 }] });
 });
 
 router.use((err, req, res, next) => {
-  res.status(500)
-    .json(err.jsonResponse || {errors: [{message: err.toString()}]});
+  res
+    .status(500)
+    .json(err.jsonResponse || { errors: [{ message: err.toString() }] });
 });
 
 export default router;

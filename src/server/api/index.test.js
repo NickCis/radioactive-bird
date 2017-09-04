@@ -6,7 +6,7 @@ const twitterMock = {
   bearerToken: undefined,
   getTweet: jest.fn(),
   search: jest.fn(),
-}
+};
 
 Twitter.mockImplementation(() => {
   return twitterMock;
@@ -38,28 +38,20 @@ describe('/search/:query - endpoint', () => {
 
   it('should call auth if there isn a bearer token', () => {
     twitterMock.auth.mockReturnValue(new Promise(jest.fn()));
-    api(
-      { method: 'GET', url: '/search/test' },
-      response,
-      next
-    );
+    api({ method: 'GET', url: '/search/test' }, response, next);
     expect(twitterMock.auth.mock.calls.length).toBe(1);
   });
 
   it('should not call auth if there is a bearer token', () => {
     twitterMock.bearerToken = 'test';
-    api(
-      { method: 'GET', url: '/search/test' },
-      response,
-      next
-    );
+    api({ method: 'GET', url: '/search/test' }, response, next);
     expect(twitterMock.auth.mock.calls.length).toBe(0);
   });
 
   it('should give a valid response', () => {
     return new Promise(rs => {
       const query = 'test';
-      const json = {query};
+      const json = { query };
       twitterMock.bearerToken = 'test';
       twitterMock.search.mockImplementation(q => {
         expect(q).toBe(query);
@@ -71,18 +63,14 @@ describe('/search/:query - endpoint', () => {
         rs();
       });
 
-      api(
-        { method: 'GET', url: `/search/${query}` },
-        response,
-        next
-      );
+      api({ method: 'GET', url: `/search/${query}` }, response, next);
     });
   });
 
   it('should return errors', () => {
     return new Promise(rs => {
       const query = 'test';
-      const json = {query};
+      const json = { query };
       twitterMock.bearerToken = 'test';
       twitterMock.search.mockImplementation(q => {
         expect(q).toBe(query);
@@ -94,11 +82,7 @@ describe('/search/:query - endpoint', () => {
         rs();
       });
 
-      api(
-        { method: 'GET', url: `/search/${query}` },
-        response,
-        next
-      );
+      api({ method: 'GET', url: `/search/${query}` }, response, next);
     });
   });
 });
@@ -110,28 +94,20 @@ describe('/tweet/:id - endpoint', () => {
 
   it('should call auth if there isn a bearer token', () => {
     twitterMock.auth.mockReturnValue(new Promise(jest.fn()));
-    api(
-      { method: 'GET', url: '/tweet/test' },
-      response,
-      next
-    );
+    api({ method: 'GET', url: '/tweet/test' }, response, next);
     expect(twitterMock.auth.mock.calls.length).toBe(1);
   });
 
   it('should not call auth if there is a bearer token', () => {
     twitterMock.bearerToken = 'test';
-    api(
-      { method: 'GET', url: '/tweet/test' },
-      response,
-      next
-    );
+    api({ method: 'GET', url: '/tweet/test' }, response, next);
     expect(twitterMock.auth.mock.calls.length).toBe(0);
   });
 
   it('should give a valid response', () => {
     return new Promise(rs => {
       const id = 'test';
-      const json = {id};
+      const json = { id };
       twitterMock.bearerToken = 'test';
       twitterMock.getTweet.mockImplementation(q => {
         expect(q).toBe(id);
@@ -143,18 +119,14 @@ describe('/tweet/:id - endpoint', () => {
         rs();
       });
 
-      api(
-        { method: 'GET', url: `/tweet/${id}` },
-        response,
-        next
-      );
+      api({ method: 'GET', url: `/tweet/${id}` }, response, next);
     });
   });
 
   it('should return errors', () => {
     return new Promise(rs => {
       const id = 'test';
-      const json = {id};
+      const json = { id };
       twitterMock.bearerToken = 'test';
       twitterMock.getTweet.mockImplementation(q => {
         expect(q).toBe(id);
@@ -166,11 +138,7 @@ describe('/tweet/:id - endpoint', () => {
         rs();
       });
 
-      api(
-        { method: 'GET', url: `/tweet/${id}` },
-        response,
-        next
-      );
+      api({ method: 'GET', url: `/tweet/${id}` }, response, next);
     });
   });
 });

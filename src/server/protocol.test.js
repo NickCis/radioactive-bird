@@ -25,7 +25,7 @@ describe('Server Protocol - searchTweets', () => {
 
   it('should give a valid response', () => {
     const query = 'test';
-    const json = {query};
+    const json = { query };
     clientMock.bearerToken = 'test';
     clientMock.search.mockImplementation(q => {
       expect(q).toBe(query);
@@ -36,7 +36,7 @@ describe('Server Protocol - searchTweets', () => {
 
   it('should return errors', () => {
     const query = 'test';
-    const json = {query};
+    const json = { query };
     clientMock.bearerToken = 'test';
     clientMock.search.mockImplementation(q => {
       expect(q).toBe(query);
@@ -67,7 +67,7 @@ describe('Server Protocol - fetchTweet', () => {
 
   it('should give a valid response', () => {
     const id = 'test';
-    const json = {id};
+    const json = { id };
     clientMock.bearerToken = 'test';
     clientMock.getTweet.mockImplementation(q => {
       expect(q).toBe(id);
@@ -78,7 +78,7 @@ describe('Server Protocol - fetchTweet', () => {
 
   it('should return errors', () => {
     const id = 'test';
-    const json = {id};
+    const json = { id };
     clientMock.bearerToken = 'test';
     clientMock.getTweet.mockImplementation(q => {
       expect(q).toBe(id);
