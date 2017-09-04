@@ -8,7 +8,8 @@ export const client = new Twitter({
   consumerKey:
     getProcess()['env'].TWITTER_CONSUMER_KEY || process.env.RAZZLE_CONSUMER_KEY,
   consumerSecret:
-    getProcess()['env'].TWITTER_CONSUMER_SECRET || process.env.RAZZLE_CONSUMER_SECRET,
+    getProcess()['env'].TWITTER_CONSUMER_SECRET ||
+    process.env.RAZZLE_CONSUMER_SECRET,
 });
 
 router.use((req, res, next) => {
