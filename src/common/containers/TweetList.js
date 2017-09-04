@@ -101,4 +101,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export const StyledTweetList = withStyles(styles)(TweetList);
-export default connectWithSSR(mapStateToProps, mapDispatchToProps)(StyledTweetList);
+export default connectWithSSR(mapStateToProps, mapDispatchToProps)(
+  StyledTweetList
+);

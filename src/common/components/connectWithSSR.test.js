@@ -7,7 +7,6 @@ import {
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter as Router } from 'react-router';
-import { renderRoutes } from 'react-router-config';
 import { mount } from 'enzyme';
 
 describe('getRouteId', () => {
@@ -22,7 +21,9 @@ describe('getRouteId', () => {
   });
 
   it('should use build a complex key', () => {
-    expect(getRouteId({}, { path: '/' }, { url: 'test' })).toEqual('Component / test');
+    expect(getRouteId({}, { path: '/' }, { url: 'test' })).toEqual(
+      'Component / test'
+    );
   });
 });
 
@@ -58,7 +59,7 @@ describe('connectWithSSR', () => {
     mount(
       <Provider store={store}>
         <Router>
-          <HocComponent route={{ key: 'test' }} match={{ url: 'test' }}/>
+          <HocComponent route={{ key: 'test' }} match={{ url: 'test' }} />
         </Router>
       </Provider>
     );
@@ -74,7 +75,7 @@ describe('connectWithSSR', () => {
     mount(
       <Provider store={store}>
         <Router>
-          <HocComponent route={{ key: 'test' }} match={{ url: 'test' }}/>
+          <HocComponent route={{ key: 'test' }} match={{ url: 'test' }} />
         </Router>
       </Provider>
     );
@@ -89,7 +90,7 @@ describe('connectWithSSR', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Router>
-          <HocComponent route={{ key: 'test' }} match={{ url: 'test' }}/>
+          <HocComponent route={{ key: 'test' }} match={{ url: 'test' }} />
         </Router>
       </Provider>
     );
@@ -102,10 +103,11 @@ describe('connectWithSSR', () => {
     const Component = setup();
     const store = mockStore({ initialData: { pages: [] } });
     const HocComponent = connectWithSSR()(Component);
-    const Wrapper = ({route, match}) => (
+    // eslint-disable-next-line react/prop-types
+    const Wrapper = ({ route, match }) => (
       <Provider store={store}>
         <Router>
-           <HocComponent route={route} match={match} />
+          <HocComponent route={route} match={match} />
         </Router>
       </Provider>
     );
@@ -126,10 +128,11 @@ describe('connectWithSSR', () => {
     const Component = setup();
     const store = mockStore({ initialData: { pages: [] } });
     const HocComponent = connectWithSSR()(Component);
-    const Wrapper = ({route, match}) => (
+    // eslint-disable-next-line react/prop-types
+    const Wrapper = ({ route, match }) => (
       <Provider store={store}>
         <Router>
-           <HocComponent route={route} match={match} />
+          <HocComponent route={route} match={match} />
         </Router>
       </Provider>
     );

@@ -8,14 +8,12 @@ import {
 } from '../actions/initialData';
 
 export const getRouteId = (Page, route, match) => {
-  if (Page.getRouteId)
-    return Page.getRouteId({route, match});
+  if (Page.getRouteId) return Page.getRouteId({ route, match });
 
-  if (route.key)
-    return route.key;
+  if (route.key) return route.key;
 
   return [getDisplayName(Page), route.path, match.url].filter(e => e).join(' ');
-}
+};
 
 export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
   const mapStateToPropsIsFunction = typeof mapStateToProps === 'function';
@@ -34,6 +32,7 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
     class ReduxSSR extends React.Component {
       static get propTypes() {
         return {
+          match: PropTypes.object.isRequired,
           route: PropTypes.object.isRequired,
           __initialDataPages: PropTypes.array.isRequired,
           __dismissInitialData: PropTypes.func.isRequired,
@@ -58,11 +57,15 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
         return Page.getInitialData(props);
       }
 
-      fetchDataIfNeeded({nextRoute, nextMatch}={}) {
+      fetchDataIfNeeded({ nextRoute, nextMatch } = {}) {
         if (!Page.getInitialData) return;
         const { __initialDataPages, route, match } = this.props;
 
-        if (__initialDataPages.indexOf(getRouteId(Page, nextRoute || route, nextMatch || match)) !== -1)
+        if (
+          __initialDataPages.indexOf(
+            getRouteId(Page, nextRoute || route, nextMatch || match)
+          ) !== -1
+        )
           return;
 
         Page.getInitialData({
@@ -76,18 +79,17 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
         this.fetchDataIfNeeded();
       }
 
-      componentWillReceiveProps({route: nextRoute, match: nextMatch}) {
+      componentWillReceiveProps({ route: nextRoute, match: nextMatch }) {
         if (!Page.getInitialData) return;
 
         const { route, match } = this.props;
         const key = getRouteId(Page, route, match);
         const nextKey = getRouteId(Page, nextRoute, nextMatch);
 
-        if (key === nextKey)
-          return;
+        if (key === nextKey) return;
 
         this.dismissInitialData();
-        this.fetchDataIfNeeded({nextRoute, nextMatch});
+        this.fetchDataIfNeeded({ nextRoute, nextMatch });
       }
 
       dismissInitialData() {
