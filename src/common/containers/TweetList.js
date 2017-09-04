@@ -70,20 +70,15 @@ export class TweetList extends React.Component {
       errorText = error.errors[0].message;
 
     return (
-      <NotIdealState
-        headline="Error"
-        subheading={errorText}
-        Icon={BugReport}
-      />
-    )
+      <NotIdealState headline="Error" subheading={errorText} Icon={BugReport} />
+    );
   }
 
   render() {
     const { loading, isError, tweets, classes } = this.props;
     if (loading) return this.renderLoading();
     if (isError) return this.renderError();
-    if (tweets.length === 0)
-      return this.renderEmpty();
+    if (tweets.length === 0) return this.renderEmpty();
 
     return (
       <div className={classes.wrapper}>

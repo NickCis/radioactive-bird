@@ -83,12 +83,8 @@ export class Tweet extends React.Component {
       errorText = error.errors[0].message;
 
     return (
-      <NotIdealState
-        headline="Error"
-        subheading={errorText}
-        Icon={BugReport}
-      />
-    )
+      <NotIdealState headline="Error" subheading={errorText} Icon={BugReport} />
+    );
   }
 
   render() {
