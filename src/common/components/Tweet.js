@@ -13,7 +13,8 @@ import Typography from 'material-ui/Typography';
 import red from 'material-ui/colors/red';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
-import Link from 'material-ui-icons/Link';
+import LinkIcon from 'material-ui-icons/Link';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   card: {
@@ -36,6 +37,10 @@ const styles = theme => ({
   },
   actionButton: {
     'pointer-events': 'none',
+  },
+  link: {
+    color: 'inherit',
+    'text-decoration': 'none',
   },
 });
 
@@ -95,7 +100,7 @@ class Tweet extends React.Component {
   }
 
   render() {
-    const { classes, className, tweet } = this.props;
+    const { classes, className, tweet, hideLink } = this.props;
 
     return (
       <Card className={[classes.card, className ? className : ''].join(' ')}>
@@ -118,9 +123,13 @@ class Tweet extends React.Component {
             <Typography type="caption">{tweet['retweet_count']}</Typography>
           </IconButton>
           <div className={classes.flexGrow} />
-          <IconButton aria-label="Go to Tweet">
-            <Link />
-          </IconButton>
+          { !hideLink && (
+            <IconButton aria-label="Go to Tweet">
+              <Link className={classes.link} to={`/tweet/${tweet.id}`}>
+                <LinkIcon />
+              </Link>
+            </IconButton>
+          ) }
         </CardActions>
       </Card>
     );
@@ -144,6 +153,7 @@ Tweet.propTypes = {
   }),
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
+  hideLink: PropTypes.bool,
 };
 
 export default withStyles(styles)(Tweet);

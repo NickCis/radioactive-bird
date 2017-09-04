@@ -22,8 +22,6 @@ describe('tweets - Actions', () => {
     return store.dispatch(actions.searchTweets('test')).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
-
-    expect(actions.setLoadedInitialData(path)).toEqual(expectedAction);
   });
 
   it('creates ERROR_SEARCHING_TWEETS when searching tweets has been returned error', () => {
@@ -41,8 +39,6 @@ describe('tweets - Actions', () => {
     return store.dispatch(actions.searchTweets('test')).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
-
-    expect(actions.setLoadedInitialData(path)).toEqual(expectedAction);
   });
 
   it('creates FINISHED_FETCHING_TWEET when fetching tweet has been done', () => {
@@ -60,8 +56,46 @@ describe('tweets - Actions', () => {
     return store.dispatch(actions.fetchTweet('test')).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
+  });
 
-    expect(actions.setLoadedInitialData(path)).toEqual(expectedAction);
+  it('creates FINISHED_FETCHING_TWEET when fetching tweet (if needed) has been done', () => {
+    const expectedActions = [
+      { type: actions.FETCH_TWEET, id: 'test' },
+      { type: actions.FINISHED_FETCHING_TWEET, id: 'test', payload: {} },
+    ];
+
+    const fetchTweet = jest.fn().mockReturnValue(Promise.resolve({}));
+
+    __setCallingFunction('fetchTweet', fetchTweet);
+
+    const store = mockStore({
+      tweets: {
+      },
+    });
+
+    return store.dispatch(actions.fetchTweetIfNeeded('test')).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('does not create FINISHED_FETCHING_TWEET when fetching tweet (if needed) has been done', () => {
+    const expectedActions = [];
+
+    const fetchTweet = jest.fn().mockReturnValue(Promise.resolve({}));
+
+    __setCallingFunction('fetchTweet', fetchTweet);
+
+    const store = mockStore({
+      tweets: {
+        test: {
+          text: 'test',
+        },
+      },
+    });
+
+    return store.dispatch(actions.fetchTweetIfNeeded('test')).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('creates ERROR_FETCHING_TWEET when fetching tweet has been done', () => {
@@ -79,7 +113,5 @@ describe('tweets - Actions', () => {
     return store.dispatch(actions.fetchTweet('test')).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
-
-    expect(actions.setLoadedInitialData(path)).toEqual(expectedAction);
   });
 });

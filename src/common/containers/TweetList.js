@@ -15,6 +15,7 @@ const styles = {
     margin: '0 auto',
   },
   loading: {
+    'margin-top': '15px',
     width: '100%',
     'text-align': 'center',
   },

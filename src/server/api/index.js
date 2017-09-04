@@ -18,6 +18,12 @@ router.get('/search/:query', (req, res) => {
   }, 500);
 });
 
+router.get('/tweet/:id', (req, res) => {
+  setTimeout(() => {
+    res.json(searchStubResponse.statuses[0]);
+  }, 500);
+});
+
 router.use((req, res) => {
   res.status(404).json({ error: 'Not found', code: 404 });
 });
