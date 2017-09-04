@@ -70,8 +70,8 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
 
         Page.getInitialData({
           ...this.props,
-          route: nextRoute,
-          match: nextMatch,
+          route: nextRoute || route,
+          match: nextMatch || match,
         });
       }
 
