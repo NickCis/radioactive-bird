@@ -22,17 +22,18 @@ const setUpStepper = steps => {
 
     next() {
       const nextStep = steps.shift();
-      if (nextStep)
-        nextStep(this.props);
+      // eslint-disable-next-line react/prop-types
+      if (nextStep) nextStep(this.props);
     }
 
     render() {
+      // eslint-disable-next-line react/prop-types
       return renderRoutes(this.props.route.routes);
     }
   }
 
   return Stepper;
-}
+};
 
 describe('getRouteId', () => {
   it('shoud call `Page.getRouteId` as the first option', () => {
@@ -126,8 +127,8 @@ describe('connectWithSSR', () => {
 
   it('should not call getInitialData on web if changed props create same key (no double fetch)', done => {
     const steps = [
-      ({history}) => history.push('/test/1'),
-      ({history}) => history.push('/test/1'),
+      ({ history }) => history.push('/test/1'),
+      ({ history }) => history.push('/test/1'),
       () => {
         expect(Component.getInitialData.mock.calls.length).toBe(1);
         expect(Component.getInitialData.mock.calls[0][0]).toMatchObject({
@@ -159,17 +160,15 @@ describe('connectWithSSR', () => {
     const store = mockStore({ initialData: { pages: [] } });
     mount(
       <Provider store={store}>
-        <Router>
-          {renderRoutes(routes)}
-        </Router>
+        <Router>{renderRoutes(routes)}</Router>
       </Provider>
     );
   });
 
   it('should call getInitialData on web if changed props create diferent key', done => {
     const steps = [
-      ({history}) => history.push('/test/1'),
-      ({history}) => history.push('/test/2'),
+      ({ history }) => history.push('/test/1'),
+      ({ history }) => history.push('/test/2'),
       () => {
         expect(Component.getInitialData.mock.calls.length).toBe(2);
         expect(Component.getInitialData.mock.calls[0][0]).toMatchObject({
@@ -189,7 +188,7 @@ describe('connectWithSSR', () => {
           },
         });
         done();
-      }
+      },
     ];
 
     const Component = setup();
@@ -209,9 +208,7 @@ describe('connectWithSSR', () => {
     const store = mockStore({ initialData: { pages: [] } });
     mount(
       <Provider store={store}>
-        <Router>
-          {renderRoutes(routes)}
-        </Router>
+        <Router>{renderRoutes(routes)}</Router>
       </Provider>
     );
   });

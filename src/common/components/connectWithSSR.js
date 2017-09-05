@@ -59,13 +59,16 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
 
       fetchDataIfNeeded(nextProps) {
         if (!Page.getInitialData) return;
-        const { __initialDataPages, __dismissInitialData, route, match, ...props } = nextProps || this.props;
+        const {
+          __initialDataPages,
+          __dismissInitialData, // eslint-disable-line no-unused-vars
+          route,
+          match,
+          ...props
+        } =
+          nextProps || this.props;
 
-        if (
-          __initialDataPages.indexOf(
-            getRouteId(Page, route, match)
-          ) !== -1
-        )
+        if (__initialDataPages.indexOf(getRouteId(Page, route, match)) !== -1)
           return;
 
         Page.getInitialData({
