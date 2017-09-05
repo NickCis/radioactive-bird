@@ -12,7 +12,14 @@ export const getRouteId = (Page, route, match) => {
 
   if (route.key) return route.key;
 
-  return [getDisplayName(Page), route.path, match.url].filter(e => e).join(' ');
+  let params = [];
+  if (match.params) {
+    params = Object.keys(match.params)
+      .sort()
+      .map(k => `${k}=${decodeURIComponent(match.params[k])}`);
+  }
+
+  return [getDisplayName(Page), route.path, ...params].filter(e => e).join(' ');
 };
 
 export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
@@ -68,8 +75,8 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
         } =
           nextProps || this.props;
 
-        if (__initialDataPages.indexOf(getRouteId(Page, route, match)) !== -1)
-          return;
+        const key = getRouteId(Page, route, match);
+        if (__initialDataPages.indexOf(key) !== -1) return;
 
         Page.getInitialData({
           route,

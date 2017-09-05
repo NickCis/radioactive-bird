@@ -47,9 +47,9 @@ describe('getRouteId', () => {
   });
 
   it('should use build a complex key', () => {
-    expect(getRouteId({}, { path: '/' }, { url: 'test' })).toEqual(
-      'Component / test'
-    );
+    expect(
+      getRouteId({}, { path: '/' }, { url: 'test', params: { test: 'test' } })
+    ).toEqual('Component / test=test');
   });
 });
 

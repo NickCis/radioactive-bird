@@ -93,7 +93,7 @@ server
                     .js}" defer crossorigin></script>`}
           </head>
           <body>
-              <div id="root">${markup}</div>
+              <div id="root"><div>${markup}</div></div>
               <script>
                 window.__PRELOADED_STATE__ = ${serialize(finalState)}
               </script>
