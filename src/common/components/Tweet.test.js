@@ -11,6 +11,7 @@ describe('<Tweet />', () => {
       <StaticRouter location="/" context={{}}>
         <Tweet
           tweet={{
+            id_str: 'test',
             title: 'test',
             user: {
               screen_name: 'test',

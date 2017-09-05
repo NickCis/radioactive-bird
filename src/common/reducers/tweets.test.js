@@ -12,7 +12,7 @@ describe('tweets - reducers', () => {
   });
 
   it('should handle FINISHED_SEARCHING_TWEETS', () => {
-    const tweet = { id: 'test' };
+    const tweet = { id_str: 'test' };
     expect(
       reducer(undefined, {
         type: FINISHED_SEARCHING_TWEETS,
@@ -20,7 +20,7 @@ describe('tweets - reducers', () => {
           statuses: [tweet],
         },
       })
-    ).toEqual({ [tweet.id]: tweet });
+    ).toEqual({ [tweet['id_str']]: tweet });
   });
 
   it('should handle FETCH_TWEET', () => {
@@ -33,14 +33,14 @@ describe('tweets - reducers', () => {
   });
 
   it('should handle FINISHED_FETCHING_TWEET', () => {
-    const tweet = { id: 'test' };
+    const tweet = { id_str: 'test' };
     expect(
       reducer(undefined, {
         type: FINISHED_FETCHING_TWEET,
         payload: tweet,
-        id: tweet.id,
+        id: tweet['id_str'],
       })
-    ).toEqual({ [tweet.id]: tweet });
+    ).toEqual({ [tweet['id_str']]: tweet });
   });
   it('should handle ERROR_FETCHING_TWEET', () => {
     expect(

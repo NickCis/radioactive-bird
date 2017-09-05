@@ -22,7 +22,7 @@ export default (
       return {
         ...state,
         loading: false,
-        result: action.payload.statuses.map(e => e.id),
+        result: action.payload.statuses.map(e => e['id_str']),
         metadata: action.payload.search_metadata,
       };
 

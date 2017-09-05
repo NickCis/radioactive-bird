@@ -116,7 +116,7 @@ exports[`<Tweet /> renders Tweet correctly 1`] = `
       >
         <a
           class="Tweet-link-7"
-          href="/tweet/undefined"
+          href="/tweet/test"
         >
           <svg
             aria-hidden="true"

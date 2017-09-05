@@ -11,7 +11,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         ...action.payload.statuses.reduce((acc, ele) => {
-          acc[ele.id] = ele;
+          acc[ele['id_str']] = ele;
           return acc;
         }, {}),
       };

@@ -30,7 +30,7 @@ describe('search - reducers', () => {
   });
 
   it('should handle FINISHED_SEARCHING_TWEETS', () => {
-    const tweet = { id: 'test' };
+    const tweet = { id_str: 'test' };
     expect(
       reducer(undefined, {
         type: FINISHED_SEARCHING_TWEETS,
@@ -39,7 +39,7 @@ describe('search - reducers', () => {
           search_metadata: {},
         },
       })
-    ).toEqual({ loading: false, metadata: {}, result: [tweet.id] });
+    ).toEqual({ loading: false, metadata: {}, result: [tweet['id_str']] });
   });
 
   it('should handle ERROR_SEARCHING_TWEETS', () => {

@@ -32,7 +32,7 @@ describe('<TweetList />', () => {
           searchTweets={jest.fn()}
           tweets={[
             {
-              id: 'test',
+              id_str: 'test',
               title: 'test',
               user: {
                 screen_name: 'test',

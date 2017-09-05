@@ -125,7 +125,7 @@ class Tweet extends React.Component {
           <div className={classes.flexGrow} />
           {!hideLink && (
             <IconButton aria-label="Go to Tweet">
-              <Link className={classes.link} to={`/tweet/${tweet.id}`}>
+              <Link className={classes.link} to={`/tweet/${tweet['id_str']}`}>
                 <LinkIcon />
               </Link>
             </IconButton>
@@ -138,6 +138,7 @@ class Tweet extends React.Component {
 
 Tweet.propTypes = {
   tweet: PropTypes.shape({
+    id_str: PropTypes.string.isRequired,
     user: PropTypes.shape({
       name: PropTypes.string.isRequired,
       screen_name: PropTypes.string.isRequired,

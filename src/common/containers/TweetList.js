@@ -82,7 +82,7 @@ export class TweetList extends React.Component {
     return (
       <div className={classes.wrapper}>
         {tweets.map(t => (
-          <Tweet key={t.id} className={classes.tweet} tweet={t} />
+          <Tweet key={t['id_str']} className={classes.tweet} tweet={t} />
         ))}
       </div>
     );
