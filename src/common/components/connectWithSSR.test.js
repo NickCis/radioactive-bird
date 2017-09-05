@@ -51,6 +51,17 @@ describe('getRouteId', () => {
       getRouteId({}, { path: '/' }, { url: 'test', params: { test: 'test' } })
     ).toEqual('Component / test=test');
   });
+
+  // Bug: https://github.com/ReactTraining/react-router/issues/5296
+  it('should build same id regardless react-router#5296 bug', () => {
+    expect(
+      getRouteId(
+        {},
+        { path: '/' },
+        { url: 'test', params: { test: 'test%20test' } }
+      )
+    ).toEqual('Component / test=test test');
+  });
 });
 
 describe('connectWithSSR', () => {

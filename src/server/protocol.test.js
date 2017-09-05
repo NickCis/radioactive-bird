@@ -5,8 +5,8 @@ import { searchTweets, fetchTweet } from './protocol';
 describe('Server Protocol - searchTweets', () => {
   beforeEach(() => {
     clientMock.bearerToken = undefined;
-    clientMock.auth.mockReset();
-    clientMock.search.mockReset();
+    clientMock.auth = jest.fn();
+    clientMock.search = jest.fn();
   });
 
   it('should call auth if there isn a bearer token', () => {
@@ -29,7 +29,7 @@ describe('Server Protocol - searchTweets', () => {
       expect(q).toBe(query);
       return Promise.resolve(json);
     });
-    expect(searchTweets(query)).resolves.toBe(json);
+    return expect(searchTweets(query)).resolves.toBe(json);
   });
 
   it('should return errors', () => {
@@ -40,7 +40,16 @@ describe('Server Protocol - searchTweets', () => {
       expect(q).toBe(query);
       return Promise.reject(json);
     });
-    expect(searchTweets(query)).rejects.toBe(json);
+    return expect(searchTweets(query)).rejects.toBe(json);
+  });
+
+  // Bug: https://github.com/ReactTraining/react-router/issues/5296
+  it('should decode query because react-router#5296 bug', () => {
+    clientMock.bearerToken = 'test';
+    return searchTweets('test%20test').then(() => {
+      expect(clientMock.search.mock.calls.length).toBe(1);
+      expect(clientMock.search.mock.calls[0][0]).toBe('test test');
+    });
   });
 });
 
@@ -71,7 +80,7 @@ describe('Server Protocol - fetchTweet', () => {
       expect(q).toBe(id);
       return Promise.resolve(json);
     });
-    expect(fetchTweet(id)).resolves.toBe(json);
+    return expect(fetchTweet(id)).resolves.toBe(json);
   });
 
   it('should return errors', () => {
@@ -82,6 +91,6 @@ describe('Server Protocol - fetchTweet', () => {
       expect(q).toBe(id);
       return Promise.reject(json);
     });
-    expect(fetchTweet(id)).rejects.toBe(json);
+    return expect(fetchTweet(id)).rejects.toBe(json);
   });
 });

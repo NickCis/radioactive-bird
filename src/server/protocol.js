@@ -7,7 +7,7 @@ const getClient = () => {
 };
 
 export const searchTweets = query => {
-  return getClient().then(twitter => twitter.search(query));
+  return getClient().then(twitter => twitter.search(decodeURIComponent(query)));
 };
 
 export const fetchTweet = id => {
