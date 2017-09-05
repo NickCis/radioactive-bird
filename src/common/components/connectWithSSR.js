@@ -57,21 +57,21 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
         return Page.getInitialData(props);
       }
 
-      fetchDataIfNeeded({ nextRoute, nextMatch } = {}) {
+      fetchDataIfNeeded(nextProps) {
         if (!Page.getInitialData) return;
-        const { __initialDataPages, route, match } = this.props;
+        const { __initialDataPages, __dismissInitialData, route, match, ...props } = nextProps || this.props;
 
         if (
           __initialDataPages.indexOf(
-            getRouteId(Page, nextRoute || route, nextMatch || match)
+            getRouteId(Page, route, match)
           ) !== -1
         )
           return;
 
         Page.getInitialData({
-          ...this.props,
-          route: nextRoute || route,
-          match: nextMatch || match,
+          route,
+          match,
+          ...props,
         });
       }
 
@@ -79,17 +79,18 @@ export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {
         this.fetchDataIfNeeded();
       }
 
-      componentWillReceiveProps({ route: nextRoute, match: nextMatch }) {
+      componentWillReceiveProps(nextProps) {
         if (!Page.getInitialData) return;
 
         const { route, match } = this.props;
+        const { route: nextRoute, match: nextMatch } = nextProps;
         const key = getRouteId(Page, route, match);
         const nextKey = getRouteId(Page, nextRoute, nextMatch);
 
         if (key === nextKey) return;
 
         this.dismissInitialData();
-        this.fetchDataIfNeeded({ nextRoute, nextMatch });
+        this.fetchDataIfNeeded(nextProps);
       }
 
       dismissInitialData() {

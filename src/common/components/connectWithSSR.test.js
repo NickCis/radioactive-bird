@@ -7,7 +7,32 @@ import {
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter as Router } from 'react-router';
+import { renderRoutes } from 'react-router-config';
 import { mount } from 'enzyme';
+
+const setUpStepper = steps => {
+  class Stepper extends React.Component {
+    componentDidMount() {
+      this.next();
+    }
+
+    componentDidUpdate() {
+      this.next();
+    }
+
+    next() {
+      const nextStep = steps.shift();
+      if (nextStep)
+        nextStep(this.props);
+    }
+
+    render() {
+      return renderRoutes(this.props.route.routes);
+    }
+  }
+
+  return Stepper;
+}
 
 describe('getRouteId', () => {
   it('shoud call `Page.getRouteId` as the first option', () => {
@@ -29,8 +54,8 @@ describe('getRouteId', () => {
 
 describe('connectWithSSR', () => {
   const mockStore = configureMockStore();
-  const setup = () => {
-    const Component = jest.fn().mockReturnValue(null);
+  const setup = c => {
+    const Component = c || jest.fn().mockReturnValue(null);
     Component.getInitialData = jest.fn().mockReturnValue(Promise.resolve());
     return Component;
   };
@@ -99,53 +124,95 @@ describe('connectWithSSR', () => {
     expect(store.getActions()).toEqual([dismissInitialData('test')]);
   });
 
-  it('should not call getInitialData on web if changed props create same key (no double fetch)', () => {
+  it('should not call getInitialData on web if changed props create same key (no double fetch)', done => {
+    const steps = [
+      ({history}) => history.push('/test/1'),
+      ({history}) => history.push('/test/1'),
+      () => {
+        expect(Component.getInitialData.mock.calls.length).toBe(1);
+        expect(Component.getInitialData.mock.calls[0][0]).toMatchObject({
+          match: {
+            url: '/test/1',
+          },
+          route: {
+            path: '/test/:id',
+          },
+        });
+        done();
+      },
+    ];
+
     const Component = setup();
-    const store = mockStore({ initialData: { pages: [] } });
     const HocComponent = connectWithSSR()(Component);
-    // eslint-disable-next-line react/prop-types
-    const Wrapper = ({ route, match }) => (
+    const routes = [
+      {
+        component: setUpStepper(steps),
+        routes: [
+          {
+            component: HocComponent,
+            path: '/test/:id',
+          },
+        ],
+      },
+    ];
+
+    const store = mockStore({ initialData: { pages: [] } });
+    mount(
       <Provider store={store}>
         <Router>
-          <HocComponent route={route} match={match} />
+          {renderRoutes(routes)}
         </Router>
       </Provider>
     );
-
-    const wrapper = mount(
-      <Wrapper route={{ key: 'test' }} match={{ url: 'test' }} />
-    );
-
-    wrapper.setProps({
-      route: { key: 'test' },
-      match: { url: 'test' },
-    });
-
-    expect(Component.getInitialData.mock.calls.length).toBe(1);
   });
 
-  it('should call getInitialData on web if changed props create diferent key', () => {
+  it('should call getInitialData on web if changed props create diferent key', done => {
+    const steps = [
+      ({history}) => history.push('/test/1'),
+      ({history}) => history.push('/test/2'),
+      () => {
+        expect(Component.getInitialData.mock.calls.length).toBe(2);
+        expect(Component.getInitialData.mock.calls[0][0]).toMatchObject({
+          match: {
+            url: '/test/1',
+          },
+          route: {
+            path: '/test/:id',
+          },
+        });
+        expect(Component.getInitialData.mock.calls[1][0]).toMatchObject({
+          match: {
+            url: '/test/2',
+          },
+          route: {
+            path: '/test/:id',
+          },
+        });
+        done();
+      }
+    ];
+
     const Component = setup();
-    const store = mockStore({ initialData: { pages: [] } });
     const HocComponent = connectWithSSR()(Component);
-    // eslint-disable-next-line react/prop-types
-    const Wrapper = ({ route, match }) => (
+    const routes = [
+      {
+        component: setUpStepper(steps),
+        routes: [
+          {
+            component: HocComponent,
+            path: '/test/:id',
+          },
+        ],
+      },
+    ];
+
+    const store = mockStore({ initialData: { pages: [] } });
+    mount(
       <Provider store={store}>
         <Router>
-          <HocComponent route={route} match={match} />
+          {renderRoutes(routes)}
         </Router>
       </Provider>
     );
-
-    const wrapper = mount(
-      <Wrapper route={{ key: 'test' }} match={{ url: 'test' }} />
-    );
-
-    wrapper.setProps({
-      route: { key: 'test-new' },
-      match: { url: 'test' },
-    });
-
-    expect(Component.getInitialData.mock.calls.length).toBe(2);
   });
 });
