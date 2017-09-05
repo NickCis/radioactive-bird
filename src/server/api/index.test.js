@@ -50,42 +50,38 @@ describe('/search/:query - endpoint', () => {
     expect(twitterMock.auth.mock.calls.length).toBe(0);
   });
 
-  it('should give a valid response', () => {
-    return new Promise(rs => {
-      const query = 'test';
-      const json = { query };
-      twitterMock.bearerToken = 'test';
-      twitterMock.search.mockImplementation(q => {
-        expect(q).toBe(query);
-        return Promise.resolve(json);
-      });
-
-      response.json.mockImplementation(j => {
-        expect(j).toBe(json);
-        rs();
-      });
-
-      api({ method: 'GET', url: `/search/${query}` }, response, next);
+  it('should give a valid response', done => {
+    const query = 'test';
+    const json = { query };
+    twitterMock.bearerToken = 'test';
+    twitterMock.search.mockImplementation(q => {
+      expect(q).toBe(query);
+      return Promise.resolve(json);
     });
+
+    response.json.mockImplementation(j => {
+      expect(j).toBe(json);
+      done();
+    });
+
+    api({ method: 'GET', url: `/search/${query}` }, response, next);
   });
 
-  it('should return errors', () => {
-    return new Promise(rs => {
-      const query = 'test';
-      const json = { query };
-      twitterMock.bearerToken = 'test';
-      twitterMock.search.mockImplementation(q => {
-        expect(q).toBe(query);
-        return Promise.reject(json);
-      });
-
-      response.json.mockImplementation(j => {
-        expect(j).toBe(json);
-        rs();
-      });
-
-      api({ method: 'GET', url: `/search/${query}` }, response, next);
+  it('should return errors', done => {
+    const query = 'test';
+    const json = { query };
+    twitterMock.bearerToken = 'test';
+    twitterMock.search.mockImplementation(q => {
+      expect(q).toBe(query);
+      return Promise.reject(json);
     });
+
+    response.json.mockImplementation(j => {
+      expect(j).toBe(json);
+      done();
+    });
+
+    api({ method: 'GET', url: `/search/${query}` }, response, next);
   });
 });
 
@@ -106,41 +102,37 @@ describe('/tweet/:id - endpoint', () => {
     expect(twitterMock.auth.mock.calls.length).toBe(0);
   });
 
-  it('should give a valid response', () => {
-    return new Promise(rs => {
-      const id = 'test';
-      const json = { id };
-      twitterMock.bearerToken = 'test';
-      twitterMock.getTweet.mockImplementation(q => {
-        expect(q).toBe(id);
-        return Promise.resolve(json);
-      });
-
-      response.json.mockImplementation(j => {
-        expect(j).toBe(json);
-        rs();
-      });
-
-      api({ method: 'GET', url: `/tweet/${id}` }, response, next);
+  it('should give a valid response', done => {
+    const id = 'test';
+    const json = { id };
+    twitterMock.bearerToken = 'test';
+    twitterMock.getTweet.mockImplementation(q => {
+      expect(q).toBe(id);
+      return Promise.resolve(json);
     });
+
+    response.json.mockImplementation(j => {
+      expect(j).toBe(json);
+      done();
+    });
+
+    api({ method: 'GET', url: `/tweet/${id}` }, response, next);
   });
 
-  it('should return errors', () => {
-    return new Promise(rs => {
-      const id = 'test';
-      const json = { id };
-      twitterMock.bearerToken = 'test';
-      twitterMock.getTweet.mockImplementation(q => {
-        expect(q).toBe(id);
-        return Promise.reject(json);
-      });
-
-      response.json.mockImplementation(j => {
-        expect(j).toBe(json);
-        rs();
-      });
-
-      api({ method: 'GET', url: `/tweet/${id}` }, response, next);
+  it('should return errors', done => {
+    const id = 'test';
+    const json = { id };
+    twitterMock.bearerToken = 'test';
+    twitterMock.getTweet.mockImplementation(q => {
+      expect(q).toBe(id);
+      return Promise.reject(json);
     });
+
+    response.json.mockImplementation(j => {
+      expect(j).toBe(json);
+      done();
+    });
+
+    api({ method: 'GET', url: `/tweet/${id}` }, response, next);
   });
 });
