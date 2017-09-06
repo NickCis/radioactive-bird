@@ -16,3 +16,5 @@ public/static
 .env.production.local
 
 .*.sw*
+images
+README.md
