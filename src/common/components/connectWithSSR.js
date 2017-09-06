@@ -19,7 +19,7 @@ export const getRouteId = (Page, route, match) => {
       .map(k => `${k}=${decodeURIComponent(match.params[k])}`);
   }
 
-  return [getDisplayName(Page), route.path, ...params].filter(e => e).join(' ');
+  return [route.path, ...params].filter(e => e).join(' ');
 };
 
 export default function connectWithSSR(mapStateToProps, mapDispatchToProps) {

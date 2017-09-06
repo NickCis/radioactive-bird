@@ -49,7 +49,7 @@ describe('getRouteId', () => {
   it('should use build a complex key', () => {
     expect(
       getRouteId({}, { path: '/' }, { url: 'test', params: { test: 'test' } })
-    ).toEqual('Component / test=test');
+    ).toEqual('/ test=test');
   });
 
   // Bug: https://github.com/ReactTraining/react-router/issues/5296
@@ -60,7 +60,7 @@ describe('getRouteId', () => {
         { path: '/' },
         { url: 'test', params: { test: 'test%20test' } }
       )
-    ).toEqual('Component / test=test test');
+    ).toEqual('/ test=test test');
   });
 });
 
