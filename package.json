@@ -27,7 +27,8 @@
     "env": {
       "TWITTER_CONSUMER_KEY": "@twitter-consumer-key",
       "TWITTER_CONSUMER_SECRET": "@twitter-consumer-secret"
-    }
+    },
+    "type": "npm"
   },
   "dependencies": {
     "express": "^4.15.2",

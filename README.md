@@ -5,7 +5,7 @@ A Tiny App that, based on a given keyword parameter, lists the Tweets related to
 A [Razzle ♥](https://github.com/jaredpalmer/razzle) based project.
 
 
-Packages / Libraries used:
+(Some) Packages / Libraries used:
 
 * [Razzle](https://github.com/jaredpalmer/razzle): [MIT License](https://github.com/jaredpalmer/razzle/blob/master/LICENSE)
 * [ReactJS](https://github.com/facebook/react): [BSD License](https://github.com/facebook/react/blob/master/LICENSE)
@@ -24,6 +24,7 @@ Install it and run (development):
 
 ```bash
 yarn install
+mkdir build
 yarn start
 ```
 
@@ -40,6 +41,13 @@ Run Linters:
 # First Prettier :)
 yarn run format
 yarn run lint
+```
+
+### Docker
+
+```bash
+docker build -t radioactive-bird .
+docker run -ti --rm -p 3000:3000 -e TWITTER_CONSUMER_KEY=KEY -e TWITTER_CONSUMER_SECRET=SECRET radioactive-bird
 ```
 
 ### Configuration
