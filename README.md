@@ -86,6 +86,7 @@ RAZZLE_CONSUMER_SECRET=XXXXXX
 * A Typecker such as [_flow_](https://flow.org/) could be used to add further static code analisis.
 * As regards SEO techniques, only SSR was implemented.
 * A deploy pipeline for gitlab ci should be implemented (CI actually run tested, but _now_ deployment wasn't done)
+* No PWA techniques were used, Web Workers and _LocalStorage_ could be implemented in order to cache old searchs / tweets and allow the web to be used as an app.
 
 ## Screenshots 🎉
 
