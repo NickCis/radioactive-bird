@@ -30,7 +30,7 @@ exports[`<Titile /> should render childs 1`] = `
       }
     }
   >
-    <Component
+    <Title
       title="test title"
     >
       <Route
@@ -40,7 +40,7 @@ exports[`<Titile /> should render childs 1`] = `
           This is a test
         </div>
       </Route>
-    </Component>
+    </Title>
   </Router>
 </StaticRouter>
 `;

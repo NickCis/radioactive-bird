@@ -30,7 +30,7 @@ exports[`<Status /> should render childs 1`] = `
       }
     }
   >
-    <Component
+    <Status
       code={404}
     >
       <Route
@@ -40,7 +40,7 @@ exports[`<Status /> should render childs 1`] = `
           This is a test
         </div>
       </Route>
-    </Component>
+    </Status>
   </Router>
 </StaticRouter>
 `;
