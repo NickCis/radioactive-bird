@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AppBar from '../components/AppBar';
 import { renderRoutes } from 'react-router-config';
 import { withStyles } from 'material-ui/styles';
+import Title from './Title';
 
 const styles = theme => ({
   '@global': {
@@ -22,10 +23,12 @@ const styles = theme => ({
 });
 
 const App = ({ classes, route }) => (
-  <div>
-    <AppBar />
-    {renderRoutes(route.routes)}
-  </div>
+  <Title title="Radioactive Bird">
+    <div>
+      <AppBar />
+      {renderRoutes(route.routes)}
+    </div>
+  </Title>
 );
 
 App.propTypes = {

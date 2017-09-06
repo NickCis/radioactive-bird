@@ -9,7 +9,12 @@ describe('<TweetList />', () => {
   it('renders TweetList correctly - loading', () => {
     const wrapper = render(
       <StaticRouter location="/" context={{}}>
-        <TweetList loading={true} searchTweets={jest.fn()} tweets={[]} />
+        <TweetList
+          loading={true}
+          searchTweets={jest.fn()}
+          tweets={[]}
+          match={{}}
+        />
       </StaticRouter>
     );
     expect(wrapper).toMatchSnapshot();
@@ -18,7 +23,12 @@ describe('<TweetList />', () => {
   it('renders TweetList correctly - empty list', () => {
     const wrapper = render(
       <StaticRouter location="/" context={{}}>
-        <TweetList loading={false} searchTweets={jest.fn()} tweets={[]} />
+        <TweetList
+          loading={false}
+          searchTweets={jest.fn()}
+          tweets={[]}
+          match={{}}
+        />
       </StaticRouter>
     );
     expect(wrapper).toMatchSnapshot();
@@ -30,6 +40,7 @@ describe('<TweetList />', () => {
         <TweetList
           loading={false}
           searchTweets={jest.fn()}
+          match={{}}
           tweets={[
             {
               id_str: 'test',

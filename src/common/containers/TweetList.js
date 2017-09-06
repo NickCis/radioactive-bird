@@ -8,6 +8,7 @@ import Tweet from '../components/Tweet';
 import NotIdealState from '../components/NotIdealState';
 import SentimentVeryDissatisfied from 'material-ui-icons/SentimentVeryDissatisfied';
 import BugReport from 'material-ui-icons/BugReport';
+import Title from '../components/Title';
 
 const styles = {
   wrapper: {
@@ -32,6 +33,7 @@ export class TweetList extends React.Component {
       classes: PropTypes.object.isRequired,
       isError: PropTypes.bool,
       error: PropTypes.object,
+      match: PropTypes.object.isRequired,
     };
   }
 
@@ -74,17 +76,23 @@ export class TweetList extends React.Component {
   }
 
   render() {
-    const { loading, isError, tweets, classes } = this.props;
+    const { loading, isError, tweets, classes, match } = this.props;
     if (loading) return this.renderLoading();
     if (isError) return this.renderError();
     if (tweets.length === 0) return this.renderEmpty();
 
+    const title = `Radioactive Bird - ${decodeURIComponent(
+      (match.params || {}).query || ''
+    )}`;
+
     return (
-      <div className={classes.wrapper}>
-        {tweets.map(t => (
-          <Tweet key={t['id_str']} className={classes.tweet} tweet={t} />
-        ))}
-      </div>
+      <Title title={title}>
+        <div className={classes.wrapper}>
+          {tweets.map(t => (
+            <Tweet key={t['id_str']} className={classes.tweet} tweet={t} />
+          ))}
+        </div>
+      </Title>
     );
   }
 }

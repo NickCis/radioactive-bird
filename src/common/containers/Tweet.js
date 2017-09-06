@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { fetchTweetIfNeeded, fetchTweet } from '../actions/tweets';
 import NotIdealState from '../components/NotIdealState';
 import BugReport from 'material-ui-icons/BugReport';
+import Title from '../components/Title';
 
 const styles = {
   wrapper: {
@@ -92,14 +93,19 @@ export class Tweet extends React.Component {
     if (this.isLoading()) return this.renderLoading();
     if (this.isError()) return this.renderError();
 
+    const tweet = this.getTweet();
+    const title = 'Radioactive Bird - ' + tweet.text.substr(0, 20);
+
     return (
-      <div className={classes.wrapper}>
-        <TweetComponent
-          className={classes.tweet}
-          tweet={this.getTweet()}
-          hideLink={true}
-        />
-      </div>
+      <Title title={title}>
+        <div className={classes.wrapper}>
+          <TweetComponent
+            className={classes.tweet}
+            tweet={tweet}
+            hideLink={true}
+          />
+        </div>
+      </Title>
     );
   }
 }
