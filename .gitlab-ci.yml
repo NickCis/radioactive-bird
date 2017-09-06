@@ -12,3 +12,7 @@ test:
     - yarn format
     - yarn lint
     - yarn test
+
+build:
+  script:
+    - yarn build
