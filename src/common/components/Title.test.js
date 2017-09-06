@@ -1,6 +1,6 @@
 import React from 'react';
 import Title from './Title';
-import { StaticRouter as Router } from 'react-router';
+import { StaticRouter, MemoryRouter } from 'react-router';
 import { mount } from 'enzyme';
 
 describe('<Titile />', () => {
@@ -9,22 +9,21 @@ describe('<Titile />', () => {
     const title = 'test title';
 
     mount(
-      <Router context={context}>
+      <StaticRouter location="/" context={context}>
         <Title title={title} />
-      </Router>
+      </StaticRouter>
     );
 
     expect(context.title).toBe(title);
   });
 
   it('should set the title of document', () => {
-    global.document = {};
     const title = 'test title';
 
     mount(
-      <Router context={{}}>
+      <MemoryRouter>
         <Title title={title} />
-      </Router>
+      </MemoryRouter>
     );
 
     expect(document.title).toBe(title);
@@ -35,11 +34,11 @@ describe('<Titile />', () => {
     const title = 'test title';
 
     const wrapper = mount(
-      <Router context={context}>
+      <StaticRouter location="/" context={context}>
         <Title title={title}>
           <div>This is a test</div>
         </Title>
-      </Router>
+      </StaticRouter>
     );
 
     expect(wrapper).toMatchSnapshot();

@@ -6,7 +6,7 @@ const Title = ({ title, children }) => (
   <Route
     render={({ staticContext }) => {
       if (staticContext) staticContext.title = title;
-      if (document) document.title = title;
+      else document.title = title;
       return children || null;
     }}
   />
