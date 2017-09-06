@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Status /> should render childs 1`] = `
+<StaticRouter
+  basename=""
+  context={
+    Object {
+      "status": 404,
+    }
+  }
+  location="/"
+>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <Component
+      code={404}
+    >
+      <Route
+        render={[Function]}
+      >
+        <div>
+          This is a test
+        </div>
+      </Route>
+    </Component>
+  </Router>
+</StaticRouter>
+`;
