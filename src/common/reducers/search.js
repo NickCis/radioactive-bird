@@ -5,7 +5,7 @@ import {
 } from '../actions/tweets';
 
 export default (
-  state = { loading: false, result: [], metadata: {} },
+  state = { loading: false, result: [], query: '', metadata: {} },
   action
 ) => {
   switch (action.type) {
@@ -16,6 +16,7 @@ export default (
         error: undefined,
         metadata: {},
         loading: true,
+        query: action.query,
       };
 
     case FINISHED_SEARCHING_TWEETS:

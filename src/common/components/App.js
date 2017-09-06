@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '../components/AppBar';
+import AppBar from '../containers/AppBar';
 import { renderRoutes } from 'react-router-config';
 import { withStyles } from 'material-ui/styles';
 import Title from './Title';

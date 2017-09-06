@@ -12,9 +12,10 @@ export const ERROR_FETCHING_TWEET = 'ERROR_FETCHING_TWEET';
 
 export const searchTweets = query => {
   return (dispatch, getState) => {
+    const decodedQuery = decodeURIComponent(query);
     dispatch({
       type: SEARCH_TWEETS,
-      query,
+      query: decodedQuery,
     });
 
     return searchTweetsProtocol(query)
@@ -22,14 +23,14 @@ export const searchTweets = query => {
         dispatch({
           type: FINISHED_SEARCHING_TWEETS,
           payload,
-          query,
+          query: decodedQuery,
         });
       })
       .catch(error => {
         dispatch({
           type: ERROR_SEARCHING_TWEETS,
           error,
-          query,
+          query: decodedQuery,
         });
       });
   };

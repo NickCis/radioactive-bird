@@ -11,6 +11,7 @@ describe('search - reducers', () => {
       loading: false,
       result: [],
       metadata: {},
+      query: '',
     });
   });
 
@@ -26,6 +27,7 @@ describe('search - reducers', () => {
       loading: true,
       metadata: {},
       result: [],
+      query: 'test',
     });
   });
 
@@ -39,7 +41,12 @@ describe('search - reducers', () => {
           search_metadata: {},
         },
       })
-    ).toEqual({ loading: false, metadata: {}, result: [tweet['id_str']] });
+    ).toEqual({
+      loading: false,
+      metadata: {},
+      result: [tweet['id_str']],
+      query: '',
+    });
   });
 
   it('should handle ERROR_SEARCHING_TWEETS', () => {
@@ -54,6 +61,7 @@ describe('search - reducers', () => {
       result: [],
       isError: true,
       error: {},
+      query: '',
     });
   });
 });

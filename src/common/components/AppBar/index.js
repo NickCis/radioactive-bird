@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
+import MaterialAppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import ExpandedAppSearch from './ExpandedAppSearch';
@@ -37,11 +37,11 @@ const styles = {
   },
 };
 
-const _AppBar = ({ classes, history }) => {
+const AppBar = ({ classes, history, query }) => {
   const search = t => history.push(`/search/${encodeURIComponent(t)}`);
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <MaterialAppBar position="static">
         <Toolbar>
           <Link className={classes.link} to="/">
             <Typography type="title" color="inherit">
@@ -51,22 +51,25 @@ const _AppBar = ({ classes, history }) => {
           <ExpandedAppSearch
             className={classes.expandedAppSearch}
             onSearch={search}
+            text={query || ''}
           />
           <CollapsedAppSearch
             className={classes.collapsedAppSearch}
             onSearch={search}
+            text={query || ''}
           />
         </Toolbar>
-      </AppBar>
+      </MaterialAppBar>
     </div>
   );
 };
 
-_AppBar.propTypes = {
+AppBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  query: PropTypes.string,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }),
 };
 
-export default withStyles(styles)(withRouter(_AppBar));
+export default withStyles(styles)(withRouter(AppBar));
