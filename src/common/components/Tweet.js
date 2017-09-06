@@ -116,7 +116,7 @@ class Tweet extends React.Component {
         <CardActions disableActionSpacing>
           <IconButton className={classes.actionButton}>
             <FavoriteIcon />
-            <Typography type="caption">{tweet['favorite_count']}</Typography>
+            <Typography type="caption">{tweet['favourites_count']}</Typography>
           </IconButton>
           <IconButton className={classes.actionButton}>
             <ShareIcon />
@@ -144,7 +144,7 @@ Tweet.propTypes = {
       screen_name: PropTypes.string.isRequired,
       profile_image_url: PropTypes.string,
     }).isRequired,
-    favorite_count: PropTypes.number.isRequired,
+    favourites_count: PropTypes.number.isRequired,
     retweet_count: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     created_at: PropTypes.string.isRequired,
