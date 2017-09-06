@@ -38,7 +38,7 @@ const styles = {
 };
 
 const _AppBar = ({ classes, history }) => {
-  const search = t => history.push(`/search/${t}`);
+  const search = t => history.push(`/search/${encodeURIComponent(t)}`);
   return (
     <div className={classes.root}>
       <AppBar position="static">
