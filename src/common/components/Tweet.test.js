@@ -17,7 +17,7 @@ describe('<Tweet />', () => {
               screen_name: 'test',
               name: 'Test',
             },
-            favourites_count: 0,
+            favorite_count: 0,
             retweet_count: 0,
             text: 'test',
             created_at: 'Sun Sep 03 20:05:30 +0000 2017',
