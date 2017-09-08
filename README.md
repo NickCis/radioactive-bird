@@ -1,6 +1,6 @@
 # Radioactive Bird
 
-[See it in action](https://radioactive-bird-amcelmfwqn.now.sh)
+[See it in action](https://radioactive-bird-efgghdwsle.now.sh/search/React)
 
 A Tiny App that, based on a given keyword parameter, lists the Tweets related to it (Razzle+React+Redux).
 
