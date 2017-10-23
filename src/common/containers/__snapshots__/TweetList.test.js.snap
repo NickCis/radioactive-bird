@@ -2,25 +2,27 @@
 
 exports[`<TweetList /> renders TweetList correctly - empty list 1`] = `
 <div
-  class="NotIdealState-wrapper-12"
+  class="NotIdealState-wrapper-11"
 >
   <svg
     aria-hidden="true"
-    class="MuiSvgIcon-root-16 NotIdealState-icon-13"
+    class="MuiSvgIcon-root-15 NotIdealState-icon-12"
     focusable="false"
-    viewbox="0 0 24 24"
+    viewBox="0 0 24 24"
   >
     <path
       d="M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10S22 17.53 22 12 17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm4.18-12.24l-1.06 1.06-1.06-1.06L13 8.82l1.06 1.06L13 10.94 14.06 12l1.06-1.06L16.18 12l1.06-1.06-1.06-1.06 1.06-1.06zM7.82 12l1.06-1.06L9.94 12 11 10.94 9.94 9.88 11 8.82 9.94 7.76 8.88 8.82 7.82 7.76 6.76 8.82l1.06 1.06-1.06 1.06zM12 14c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5z"
-    />
+    >
+      
+    </path>
   </svg>
   <h1
-    class="MuiTypography-root-17 MuiTypography-display1-21 NotIdealState-headline-14"
+    class="MuiTypography-root-16 MuiTypography-display1-20 NotIdealState-headline-13"
   >
     Empty result
   </h1>
   <h3
-    class="MuiTypography-root-17 MuiTypography-subheading-24 NotIdealState-subheading-15"
+    class="MuiTypography-root-16 MuiTypography-subheading-23 NotIdealState-subheading-14"
   >
     The search you have performed returned empty
   </h3>
@@ -34,21 +36,22 @@ exports[`<TweetList /> renders TweetList correctly - loading 1`] = `
   <div
     class="MuiCircularProgress-root-4 MuiCircularProgress-primaryColor-5"
     role="progressbar"
-    style="width:40px;height:40px;"
+    style="width:40px;height:40px"
   >
     <svg
-      class="MuiCircularProgress-svg-7 MuiCircularProgress-indeterminateSvg-8"
-      viewbox="0 0 40 40"
+      class="MuiCircularProgress-svgIndeterminate-7"
+      viewBox="0 0 50 50"
     >
       <circle
-        class="MuiCircularProgress-circle-9 MuiCircularProgress-indeterminateCircle-10"
-        cx="20"
-        cy="20"
+        class="MuiCircularProgress-circle-9 MuiCircularProgress-circleIndeterminate-10"
+        cx="25"
+        cy="25"
         fill="none"
-        r="18.2"
-        stroke-miterlimit="20"
+        r="20"
         stroke-width="3.6"
-      />
+      >
+        
+      </circle>
     </svg>
   </div>
 </div>
@@ -59,137 +62,151 @@ exports[`<TweetList /> renders TweetList correctly - with tweets 1`] = `
   class="TweetList-wrapper-1"
 >
   <div
-    class="MuiPaper-root-46 MuiPaper-shadow2-50 MuiPaper-rounded-47 Tweet-card-39 TweetList-tweet-2"
+    class="MuiPaper-root-47 MuiPaper-shadow2-51 MuiPaper-rounded-48 Tweet-card-40 TweetList-tweet-2"
   >
     <div
-      class="MuiCardContent-root-78 MuiCardHeader-root-73"
+      class="MuiCardContent-root-79 MuiCardHeader-root-74"
     >
       <div
-        class="MuiCardHeader-avatar-74"
+        class="MuiCardHeader-avatar-75"
       >
         <div
-          class="MuiAvatar-root-79 MuiAvatar-colorDefault-80 Tweet-avatar-42"
+          class="MuiAvatar-root-80 MuiAvatar-colorDefault-81 Tweet-avatar-43"
         >
           t
         </div>
       </div>
       <div
-        class="MuiCardHeader-content-75"
+        class="MuiCardHeader-content-76"
       >
         <span
-          class="MuiTypography-root-17 MuiTypography-body2-25 MuiCardHeader-title-76"
+          class="MuiTypography-root-16 MuiTypography-body2-24 MuiCardHeader-title-77"
         >
           Test @test
         </span>
         <span
-          class="MuiTypography-root-17 MuiTypography-body2-25 MuiTypography-colorSecondary-37 MuiCardHeader-subheader-77"
+          class="MuiTypography-root-16 MuiTypography-body2-24 MuiTypography-colorSecondary-37 MuiCardHeader-subheader-78"
         >
           September 3, 2017
         </span>
       </div>
     </div>
     <div
-      class="MuiCardContent-root-78"
+      class="MuiCardContent-root-79"
     >
       <p
-        class="MuiTypography-root-17 MuiTypography-body1-26"
+        class="MuiTypography-root-16 MuiTypography-body1-25"
       >
         test
       </p>
     </div>
     <div
-      class="MuiCardActions-root-82"
+      class="MuiCardActions-root-83"
     >
       <button
-        class="MuiButtonBase-root-93 MuiIconButton-root-84 Tweet-actionButton-44"
+        class="MuiButtonBase-root-94 MuiIconButton-root-85 Tweet-actionButton-45"
         role="button"
         tabindex="0"
         type="button"
       >
         <span
-          class="MuiIconButton-label-90"
+          class="MuiIconButton-label-91"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root-16"
+            class="MuiSvgIcon-root-15 MuiIconButton-icon-92"
             focusable="false"
-            viewbox="0 0 24 24"
+            viewBox="0 0 24 24"
           >
             <path
               d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-            />
+            >
+              
+            </path>
           </svg>
           <span
-            class="MuiTypography-root-17 MuiTypography-caption-27"
+            class="MuiTypography-root-16 MuiTypography-caption-26"
           >
             0
           </span>
         </span>
         <span
-          class="MuiTouchRipple-root-95"
-        />
+          class="MuiTouchRipple-root-96"
+        >
+          
+        </span>
       </button>
       <button
-        class="MuiButtonBase-root-93 MuiIconButton-root-84 Tweet-actionButton-44"
+        class="MuiButtonBase-root-94 MuiIconButton-root-85 Tweet-actionButton-45"
         role="button"
         tabindex="0"
         type="button"
       >
         <span
-          class="MuiIconButton-label-90"
+          class="MuiIconButton-label-91"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root-16"
+            class="MuiSvgIcon-root-15 MuiIconButton-icon-92"
             focusable="false"
-            viewbox="0 0 24 24"
+            viewBox="0 0 24 24"
           >
             <path
               d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
-            />
+            >
+              
+            </path>
           </svg>
           <span
-            class="MuiTypography-root-17 MuiTypography-caption-27"
+            class="MuiTypography-root-16 MuiTypography-caption-26"
           >
             0
           </span>
         </span>
         <span
-          class="MuiTouchRipple-root-95"
-        />
+          class="MuiTouchRipple-root-96"
+        >
+          
+        </span>
       </button>
       <div
-        class="Tweet-flexGrow-43"
-      />
+        class="Tweet-flexGrow-44"
+      >
+        
+      </div>
       <button
         aria-label="Go to Tweet"
-        class="MuiButtonBase-root-93 MuiIconButton-root-84"
+        class="MuiButtonBase-root-94 MuiIconButton-root-85"
         role="button"
         tabindex="0"
         type="button"
       >
         <span
-          class="MuiIconButton-label-90"
+          class="MuiIconButton-label-91"
         >
           <a
-            class="Tweet-link-45"
+            class="Tweet-link-46"
             href="/tweet/test"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root-16"
+              class="MuiSvgIcon-root-15"
               focusable="false"
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
             >
               <path
                 d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"
-              />
+              >
+                
+              </path>
             </svg>
           </a>
         </span>
         <span
-          class="MuiTouchRipple-root-95"
-        />
+          class="MuiTouchRipple-root-96"
+        >
+          
+        </span>
       </button>
     </div>
   </div>

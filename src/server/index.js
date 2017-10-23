@@ -4,9 +4,11 @@ import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { JssProvider } from 'react-jss';
+import SheetsManager from '~/common/styles/SheetsManager';
+import { SheetsRegistry, JssProvider } from 'react-jss';
 import { MuiThemeProvider } from 'material-ui/styles';
-import { sheetsManager, theme, sheetsRegistry, jss } from '../common/styles';
+import theme from '../common/styles/theme';
+import jss from './jss';
 import { matchRoutes, renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router';
 import routes from '~/common/routes';
@@ -45,6 +47,9 @@ server
       .then(d => {
         // React Router context
         const context = {};
+
+        const sheetsRegistry = new SheetsRegistry();
+        const sheetsManager = new SheetsManager();
 
         // Render the component to a string
         const markup = renderToString(
