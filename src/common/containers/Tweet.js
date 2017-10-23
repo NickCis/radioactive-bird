@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
 import TweetComponent from '../components/Tweet';
-import connectWithSSR from '../components/connectWithSSR';
+import { connectWithGetInitialData } from 'redux-data-ssr';
+import mapArgsToProps from '../mapArgsToProps';
 import { bindActionCreators } from 'redux';
 import { fetchTweetIfNeeded, fetchTweet } from '../actions/tweets';
 import NotIdealState from '../components/NotIdealState';
@@ -25,12 +26,6 @@ const styles = {
 };
 
 export class Tweet extends React.Component {
-  static getInitialData({ fetchTweetIfNeeded, match }) {
-    if (!match || !match.params || !match.params.id) return Promise.resolve();
-
-    return fetchTweetIfNeeded(match.params.id);
-  }
-
   static get propTypes() {
     return {
       match: PropTypes.object.isRequired,
@@ -112,6 +107,11 @@ export class Tweet extends React.Component {
 
 export const StyledTweet = withStyles(styles)(Tweet);
 
+const getData = ({ fetchTweetIfNeeded, match }) => {
+  if (!match || !match.params || !match.params.id) return Promise.resolve();
+  return fetchTweetIfNeeded(match.params.id);
+};
+
 const mapStateToProps = state => ({
   tweets: state.tweets,
 });
@@ -125,4 +125,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connectWithSSR(mapStateToProps, mapDispatchToProps)(StyledTweet);
+export default connectWithGetInitialData({ getData, mapArgsToProps })(
+  mapStateToProps,
+  mapDispatchToProps
+)(StyledTweet);

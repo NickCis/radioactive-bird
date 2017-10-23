@@ -5483,6 +5483,14 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-data-ssr-server@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-data-ssr-server/-/react-data-ssr-server-1.0.0.tgz#0bcd915b7a1abfc497b58e136346217ae75d219b"
+
+react-data-ssr@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-data-ssr/-/react-data-ssr-1.1.0.tgz#04b8ed8066713f39ece31cb9c581f085a16624b9"
+
 react-dev-utils@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-4.1.0.tgz#f6f436febd3f4eeb538490319b51c875c1e35bc5"
@@ -5791,6 +5799,12 @@ reduce-function-call@^1.0.1:
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux-data-ssr@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/redux-data-ssr/-/redux-data-ssr-1.1.2.tgz#7dee57cda21f569ac393413685b7cbc8e31a164d"
+  dependencies:
+    react-data-ssr "^1.1.0"
 
 redux-mock-store@^1.2.3:
   version "1.2.3"

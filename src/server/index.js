@@ -13,6 +13,7 @@ import { matchRoutes, renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router';
 import routes from '~/common/routes';
 import api from './api';
+import { resolveInitialData } from 'react-data-ssr-server';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -29,58 +30,46 @@ server
     const getState = () => store.getState();
 
     // Get routes branch in order to preload data
-    const branch = matchRoutes(routes, req.url);
-    const promises = branch.reduce((acc, b) => {
-      const getInitialData = b.route.component.getInitialData;
-      if (getInitialData)
-        acc = acc.concat(
-          getInitialData({ dispatch, getState, route: b.route, match: b.match })
-        );
-      return acc;
-    }, []);
+    const branches = matchRoutes(routes, req.url);
 
-    Promise.all(promises)
-      .catch(error => {
-        console.error('Error found while loading data');
-        console.error(error);
-      })
-      .then(d => {
-        // React Router context
-        const context = {};
+    // Pass dispatch and getState functions as extra
+    resolveInitialData(branches, { dispatch, getState }).then(({ errors }) => {
+      // React Router context
+      const context = {};
 
-        const sheetsRegistry = new SheetsRegistry();
-        const sheetsManager = new SheetsManager();
+      const sheetsRegistry = new SheetsRegistry();
+      const sheetsManager = new SheetsManager();
 
-        // Render the component to a string
-        const markup = renderToString(
-          <Provider store={store}>
-            <JssProvider registry={sheetsRegistry} jss={jss}>
-              <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
-                <StaticRouter location={req.url} context={context}>
-                  {renderRoutes(routes)}
-                </StaticRouter>
-              </MuiThemeProvider>
-            </JssProvider>
-          </Provider>
-        );
+      // Render the component to a string
+      const markup = renderToString(
+        <Provider store={store}>
+          <JssProvider registry={sheetsRegistry} jss={jss}>
+            <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
+              <StaticRouter location={req.url} context={context}>
+                {renderRoutes(routes)}
+              </StaticRouter>
+            </MuiThemeProvider>
+          </JssProvider>
+        </Provider>
+      );
 
-        const css = sheetsRegistry.toString();
+      const css = sheetsRegistry.toString();
 
-        // Grab the initial state from our Redux store
-        const finalState = store.getState();
+      // Grab the initial state from our Redux store
+      const finalState = store.getState();
 
-        // Delete the `req` property
-        delete finalState.req;
+      // Delete the `req` property
+      delete finalState.req;
 
-        if (context.status) res.status(context.status);
+      if (context.status) res.status(context.status);
 
-        if (context.url) {
-          res.writeHead(301, { Location: context.url }).end();
-          return;
-        }
+      if (context.url) {
+        res.writeHead(301, { Location: context.url }).end();
+        return;
+      }
 
-        res.send(
-          `<!doctype html>
+      res.send(
+        `<!doctype html>
           <html lang="">
           <head>
               <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -98,14 +87,14 @@ server
                     .js}" defer crossorigin></script>`}
           </head>
           <body>
-              <div id="root"><div>${markup}</div></div>
+              <div id="root">${markup}</div>
               <script>
                 window.__PRELOADED_STATE__ = ${serialize(finalState)}
               </script>
           </body>
           </html>`
-        );
-      });
+      );
+    });
   });
 
 export default server;

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import connectWithSSR from '../components/connectWithSSR';
+import { connectWithGetInitialData } from 'redux-data-ssr';
+import mapArgsToProps from '../mapArgsToProps';
 import { searchTweets } from '../actions/tweets';
 import { CircularProgress } from 'material-ui/Progress';
 import Tweet from '../components/Tweet';
@@ -35,13 +36,6 @@ export class TweetList extends React.Component {
       error: PropTypes.object,
       match: PropTypes.object.isRequired,
     };
-  }
-
-  static getInitialData({ match, searchTweets }) {
-    if (!match || !match.params || !match.params.query)
-      return Promise.resolve();
-
-    return searchTweets(match.params.query);
   }
 
   renderLoading() {
@@ -97,6 +91,11 @@ export class TweetList extends React.Component {
   }
 }
 
+const getData = ({ match, searchTweets }) => {
+  if (!match || !match.params || !match.params.query) return Promise.resolve();
+  return searchTweets(match.params.query);
+};
+
 const mapStateToProps = state => ({
   loading: state.search.loading,
   isError: state.search.isError,
@@ -109,6 +108,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export const StyledTweetList = withStyles(styles)(TweetList);
-export default connectWithSSR(mapStateToProps, mapDispatchToProps)(
-  StyledTweetList
-);
+export default connectWithGetInitialData({ getData, mapArgsToProps })(
+  mapStateToProps,
+  mapDispatchToProps
+)(StyledTweetList);
