@@ -26,7 +26,7 @@
   },
   "now": {
     "engines": {
-      "node": "8.4.0"
+      "node": "8.6.0"
     },
     "env": {
       "TWITTER_CONSUMER_KEY": "@twitter-consumer-key",
